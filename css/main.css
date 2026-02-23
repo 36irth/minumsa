@@ -835,10 +835,16 @@ li.slide2 .txt_area {
    padding: 70px 0 90px;
 }
 
-.board_row {
-   display: flex;
-   align-items: flex-start;
-   gap: 60px;
+.board .board_row{
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ 1:1:1 */
+  gap: 60px; /* 원하는 간격으로 조절 */
+  align-items: start;
+}
+
+/* ✅ 내용이 길어서 컬럼 폭이 밀리는 것 방지 */
+.board .board_row > *{
+  min-width: 0;
 }
 
 /* 좌/중 컬럼은 유연하게, 우측(민음사 소식)은 조금 더 좁게 */
@@ -866,6 +872,13 @@ li.slide2 .txt_area {
    font-weight: 600;
    line-height: 1.5;
    font-family: 'BookkMyungjo';
+}
+
+.board .board_row > :nth-child(3) h3,
+.board .board_row > :nth-child(3) h4{
+  font-size: 1.4rem;
+  line-height: 1.5;
+  font-family: 'BookkMyungjo';
 }
 
 .board_more {
