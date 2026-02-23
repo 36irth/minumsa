@@ -1,7 +1,56 @@
 document.addEventListener('DOMContentLoaded', () => {
-  // =========================
-  // 0) 메인비주얼 Swiper + progress bar
-  // =========================
+  // 헤더: 아래로 스크롤하면 숨기고, 위로 스크롤하면 다시 보이기
+const initHeaderAutoHide = () => {
+  const header = document.querySelector('header');
+  if (!header) return;
+
+  const HIDE_CLASS = 'is-hidden';
+  const DELTA = 20; // 이 픽셀 이상 움직일 때만 반응(잔떨림 방지)
+
+  let lastY = window.scrollY;
+  let ticking = false;
+
+  const update = () => {
+    const y = window.scrollY;
+
+    // 최상단이면 무조건 보이게
+    if (y <= 0) {
+      header.classList.remove(HIDE_CLASS);
+      lastY = y;
+      ticking = false;
+      return;
+    }
+
+    const diff = y - lastY;
+
+    // 너무 작은 움직임은 무시
+    if (Math.abs(diff) < DELTA) {
+      ticking = false;
+      return;
+    }
+
+    // diff > 0 : 아래로 스크롤 -> 숨김
+    // diff < 0 : 위로 스크롤 -> 표시
+    if (diff > 0) header.classList.add(HIDE_CLASS);
+    else header.classList.remove(HIDE_CLASS);
+
+    lastY = y;
+    ticking = false;
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update);
+        ticking = true;
+      }
+    },
+    { passive: true }
+  );
+};
+
+  // 메인비주얼 swiper
   const initMainVisual = () => {
     const mainSwiperEl = document.querySelector('.main_visual .swiper');
     if (!mainSwiperEl || typeof Swiper === 'undefined') return;
@@ -34,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
       },
     });
 
-    // pager 숫자 업데이트(엘리먼트가 있으면)
+    // pager 숫자 업데이트
     const numEl = document.querySelector('.main_visual .pager .txt_box .num');
     const totalEl = document.querySelector('.main_visual .pager .txt_box span:last-of-type');
     if (numEl && totalEl) {
@@ -48,9 +97,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
-  // =========================
-  // AOS 초기화(당신이 고른 한 권 등 스크롤 애니메이션)
-  // =========================
   const initAOS = () => {
     if (!window.AOS) return;
     AOS.init({
@@ -61,12 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   };
 
-  // =========================
-  // NEW 섹션(신간)
-  // ✅ 해결: 첫 카드(1번)로 돌아올 때 "마지막 카드가 첫 카드로 바뀌는(점프)" 현상 방지
-  // - 트랙을 [클론][원본][클론] 3세트로 만들고, 항상 "가운데(원본) 세트"를 보여주는 방식
-  // - 그래서 1번 카드가 멈춰도 왼쪽에 '직전 마지막 카드'가 자연스럽게 이어짐
-  // =========================
+  // new 섹션
   const initNewSection = () => {
     const section = document.querySelector('section.new');
     if (!section) return;
@@ -75,18 +116,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const track = section.querySelector('.new_track');
     if (!viewport || !track) return;
 
-    // 중복 초기화 방지
     if (track.dataset.loopReady === '1') return;
     track.dataset.loopReady = '1';
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 원본 카드들
     const originals = Array.from(track.children);
     const originalCount = originals.length;
     if (originalCount < 2) return;
 
-    // 트랙 구성: [클론][원본][클론]
     const makeClones = () => {
       const frag = document.createDocumentFragment();
       originals.forEach((node) => frag.appendChild(node.cloneNode(true)));
@@ -95,23 +133,20 @@ document.addEventListener('DOMContentLoaded', () => {
     track.insertBefore(makeClones(), track.firstChild);
     track.appendChild(makeClones());
 
-    // 속도/멈춤 시간(원하면 여기 숫자만 조절)
-    const speedPxPerSec = 70; // px/s
-    const pauseMs = 2000;      // ms
+    // 속도/멈춤 시간
+    const speedPxPerSec = 70;
+    const pauseMs = 2000;
 
-    // 레이아웃 값(리사이즈 시 재계산)
-    let step = 0;       // 카드 1칸 이동(px)
-    let loopWidth = 0;  // 원본 세트 1바퀴 폭(px)
-    let baseOffset = 0; // "가운데(원본) 세트" 시작점까지 이동해야 하는 px
+    let step = 0;
+    let loopWidth = 0;
+    let baseOffset = 0;
 
-    // 진행 상태(0 ~ loopWidth)
     let progress = 0;
-    let nextIndex = 1; // 다음 멈춤 카드 index(원본 기준 0~count-1)
-    let nextStop = 0;  // 다음 멈춤 위치(px)
+    let nextIndex = 1;
+    let nextStop = 0;
     let pausedUntil = performance.now() + pauseMs;
     let lastTime = performance.now();
 
-    // 인터랙션 상태
     let dragging = false;
     let isHoveringCard = false;
     let dragStartX = 0;
@@ -125,20 +160,17 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     const applyTransform = () => {
-      // ✅ 항상 가운데(원본) 세트를 기준으로 보이게
       track.style.transform = `translate3d(${-(baseOffset + progress)}px, 0, 0)`;
     };
 
     const calcLayout = () => {
-      // 가운데(원본) 세트의 시작 카드
       const midStart = originalCount;
       const mid0 = track.children[midStart];
       const mid1 = track.children[midStart + 1];
-      const afterMid0 = track.children[midStart + originalCount]; // 원본 다음 클론 세트의 첫 카드
+      const afterMid0 = track.children[midStart + originalCount];
 
       if (!mid0 || !mid1 || !afterMid0) return false;
 
-      // ✅ getBoundingClientRect() 기반(패딩/offsetParent 영향 최소화)
       const trackRect = track.getBoundingClientRect();
       const mid0Rect = mid0.getBoundingClientRect();
       const mid1Rect = mid1.getBoundingClientRect();
@@ -146,19 +178,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
       step = mid1Rect.left - mid0Rect.left;
       loopWidth = afterRect.left - mid0Rect.left;
-      baseOffset = mid0Rect.left - trackRect.left; // == 앞에 붙인 클론 세트 폭
+      baseOffset = mid0Rect.left - trackRect.left;
 
-      // fallback (혹시 0 나오면 offsetLeft 방식으로)
       if (!(step > 0) || !(loopWidth > 0)) {
         step = mid1.offsetLeft - mid0.offsetLeft;
         loopWidth = afterMid0.offsetLeft - mid0.offsetLeft;
         baseOffset = mid0.offsetLeft;
       }
 
-      // 현재 위치를 새 loopWidth 기준으로 정리
       progress = wrap(progress);
 
-      // 현재 카드 인덱스 기반으로 nextStop 재설정
       const currentIndex = Math.round(progress / step) % originalCount;
       nextIndex = (currentIndex + 1) % originalCount;
       nextStop = nextIndex * step;
@@ -167,11 +196,9 @@ document.addEventListener('DOMContentLoaded', () => {
       return true;
     };
 
-    // 첫 프레임에 레이아웃 계산 후 시작
     requestAnimationFrame(() => {
       if (!calcLayout()) return;
 
-      // ✅ 시작은 1번 카드(원본)에서 멈춘 상태로
       progress = 0;
       nextIndex = 1;
       nextStop = step;
@@ -190,30 +217,26 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!dragging && now >= pausedUntil && loopWidth > 0) {
         const prev = progress;
 
-        // 진행
         progress += (speedPxPerSec * dt) / 1000;
 
-        // wrap 감지
         let wrapped = false;
         if (progress >= loopWidth) {
           progress -= loopWidth;
           wrapped = true;
         }
 
-        // ✅ 마지막 → 첫 카드(0)로 넘어갈 때
-        //    (여기서 점프처럼 보이는 현상이 생기기 쉬움)
         if (wrapped && nextStop === 0) {
-          progress = 0;                 // 첫 카드 정확히 정렬
-          pausedUntil = now + pauseMs;  // 멈춤
+          progress = 0;
+          pausedUntil = now + pauseMs;
           nextIndex = 1;
           nextStop = step;
         } else if (!wrapped && nextStop !== 0 && prev < nextStop && progress >= nextStop) {
-          // 나머지 카드 멈춤
+
           progress = nextStop;
           pausedUntil = now + pauseMs;
 
           nextIndex = (nextIndex + 1) % originalCount;
-          nextStop = nextIndex * step; // 0이면 다음 wrap 시 1번에서 멈춤
+          nextStop = nextIndex * step;
         }
 
         applyTransform();
@@ -222,9 +245,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!prefersReducedMotion) requestAnimationFrame(tick);
     }
 
-    // =========================
-    // 카드 hover (JS로 .is-hover)
-    // =========================
+    // 카드 호버
     track.addEventListener('mouseover', (e) => {
       const card = e.target.closest('.new_card');
       if (!card) return;
@@ -232,7 +253,7 @@ document.addEventListener('DOMContentLoaded', () => {
       isHoveringCard = true;
       card.classList.add('is-hover');
 
-      // hover 중 자동 스크롤 멈춤
+      // 호버 중 자동 스크롤 멈춤
       pausedUntil = Number.POSITIVE_INFINITY;
     });
 
@@ -247,9 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!dragging) pausedUntil = performance.now() + 150;
     });
 
-    // =========================
-    // Drag to scroll (transform 기반)
-    // =========================
+    // 드래그, 스크롤
     viewport.addEventListener('pointerdown', (e) => {
       if (loopWidth <= 0) return;
 
@@ -259,7 +278,6 @@ document.addEventListener('DOMContentLoaded', () => {
       dragStartX = e.clientX;
       dragStartProgress = progress;
 
-      // 드래그 중 자동 스크롤 정지
       pausedUntil = Number.POSITIVE_INFINITY;
 
       viewport.setPointerCapture(e.pointerId);
@@ -282,17 +300,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const now = performance.now();
 
-      // 가장 가까운 카드로 스냅
       const snapped = Math.round(progress / step) * step;
       progress = wrap(snapped);
       applyTransform();
 
-      // 다음 멈춤 지점 계산
       const currentIndex = Math.round(progress / step) % originalCount;
       nextIndex = (currentIndex + 1) % originalCount;
       nextStop = nextIndex * step;
 
-      // 스냅 지점에서 잠깐 멈춘 뒤 재개
       pausedUntil = isHoveringCard ? Number.POSITIVE_INFINITY : now + pauseMs;
       lastTime = now;
     };
@@ -300,7 +315,6 @@ document.addEventListener('DOMContentLoaded', () => {
     viewport.addEventListener('pointerup', endDrag);
     viewport.addEventListener('pointercancel', endDrag);
 
-    // 리사이즈 시 step/loopWidth 재계산
     window.addEventListener('resize', () => {
       calcLayout();
     });
@@ -308,15 +322,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   initNewSection();
 
-  // =========================
-  // 2) BEST 섹션(베스트 셀러)
-  // 요구사항 반영:
-  // - ✅ "작은 카드 맨 앞"이 큰 카드로 승격(중복 노출 X)
-  // - ✅ 좌/우 버튼으로 이전/다음 카드 이동
-  // - ✅ 1위(데미안)도 작은 카드 리스트에 존재(초기에는 JS가 중복 제거)
-  // - ✅ 드래그로 자연스럽게 이동(스크롤 느낌)
-  // - ✅ 작은 카드 → 큰 카드 승격 시, 작은 카드엔 없던 [태그/순위/내용]은 data-*로 들고 있다가 큰 카드에 채움
-  // =========================
+  // best 섹션
   const initBestSection = () => {
     const bestSection = document.querySelector('section.best');
     if (!bestSection) return;
@@ -334,7 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // 큰 카드 DOM
     const bigTag = feature.querySelector('.best_txtbox .tag');
     const bigRank = feature.querySelector('.best_rank');
     const bigTitle = feature.querySelector('.best_title');
@@ -373,10 +378,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // 초기 big 카드: dataset or DOM 기준으로 세팅(+커버)
     setBigData(getBigData());
 
-    // small card DOM/데이터 처리
     const getCards = () => Array.from(list.querySelectorAll('.best_card'));
 
     const getCardData = (li) => {
@@ -420,16 +423,12 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     };
 
-    // small 카드들: dataset이 비어있어도 최소값 채우고 커버 반영
     getCards().forEach((li, idx) => {
       const d = getCardData(li);
-      // rank가 없으면 대충 채워줌(안 썼을 때 안전장치)
       if (!d.rank) d.rank = `${idx + 1}위`;
       applySmallData(li, d);
     });
 
-    // ✅ 초기 중복 제거: big(1위)과 같은 카드가 리스트에 있으면 제거
-    // (요구: 1위도 리스트에 존재하되, 큰 카드와 동시에 보이지 않게)
     (() => {
       const big = getBigData();
       const cards = getCards();
@@ -437,7 +436,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if (dup) dup.remove();
     })();
 
-    // 카드 + gap(1칸 이동) 픽셀 계산
     let stepPx = 0;
     const calcStepPx = () => {
       const cards = getCards();
@@ -448,8 +446,7 @@ document.addEventListener('DOMContentLoaded', () => {
     calcStepPx();
     window.addEventListener('resize', calcStepPx);
 
-    // progress(한 칸씩 이동)
-    let activeIndex = 0; // 0 = 현재 큰 카드
+    let activeIndex = 0;
     const getTotalSteps = () => 1 + getCards().length;
 
     const syncProgress = () => {
@@ -465,7 +462,6 @@ document.addEventListener('DOMContentLoaded', () => {
     syncProgress();
     window.addEventListener('resize', syncProgress);
 
-    // 애니메이션/자동재생
     const easing = 'cubic-bezier(0.22, 0.61, 0.36, 1)';
     const slideDurationMs = prefersReducedMotion ? 0 : 420;
     const autoplayDelayMs = 3800;
@@ -499,7 +495,6 @@ document.addEventListener('DOMContentLoaded', () => {
       list.style.transform = `translate3d(${xPx}px,0,0)`;
     };
 
-    // NEXT: 첫 작은 카드 → 큰 카드 승격 / 기존 큰 카드 → 맨 뒤 작은 카드로 내려감
     const goNext = ({ fromButton = false, startOffsetPx = 0 } = {}) => {
       if (isAnimating) return;
       const first = list.querySelector('.best_card');
@@ -513,29 +508,21 @@ document.addEventListener('DOMContentLoaded', () => {
       const currentBig = getBigData();
       const nextBig = getCardData(first);
 
-      // 리스트: 현재 위치(startOffset)에서 -stepPx까지 슬라이드
       if (!prefersReducedMotion) {
-        // 드래그 중이었으면 현재 오프셋을 유지한 채 이어서 이동
         setListTransform(startOffsetPx, false);
-        // 다음 프레임에 transition 적용
         requestAnimationFrame(() => setListTransform(-stepPx, true));
       }
 
-      // 큰 카드 페이드
       feature.classList.add('is-changing');
 
       const finish = () => {
-        // 리스트 위치 원복(루프 느낌)
         setListTransform(0, false);
 
-        // 큰 카드 업데이트
         setBigData(nextBig);
 
-        // 승격된(첫) 작은 카드는 "이전 큰 카드" 데이터로 바꿔서 맨 뒤로 보냄
         applySmallData(first, currentBig);
         list.appendChild(first);
 
-        // progress: 한 칸 이동
         activeIndex = (activeIndex + 1) % getTotalSteps();
         syncProgress();
 
@@ -557,7 +544,6 @@ document.addEventListener('DOMContentLoaded', () => {
       };
       list.addEventListener('transitionend', onEnd);
 
-      // transitionend 누락 대비
       window.setTimeout(() => {
         if (!isAnimating) return;
         list.removeEventListener('transitionend', onEnd);
@@ -565,7 +551,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }, slideDurationMs + 80);
     };
 
-    // PREV: 마지막 작은 카드 → 큰 카드 승격 / 기존 큰 카드 → 맨 앞 작은 카드로 내려감
     const goPrev = ({ fromButton = false, startOffsetPx = 0 } = {}) => {
       if (isAnimating) return;
 
@@ -581,14 +566,10 @@ document.addEventListener('DOMContentLoaded', () => {
       const currentBig = getBigData();
       const prevBig = getCardData(last);
 
-      // ✅ 마지막 카드를 맨 앞으로 옮겨두고(-stepPx만큼 당겨서) 자연스럽게 오른쪽으로 들어오게
       list.insertBefore(last, list.firstChild);
       applySmallData(last, currentBig);
 
       if (!prefersReducedMotion) {
-        // drag startOffset을 유지하려면: element insert로 인해 +stepPx만큼 밀린 걸 보정
-        // (before insert) transform = startOffsetPx
-        // (after insert)  transform = startOffsetPx - stepPx  => 같은 화면 위치 유지
         setListTransform(startOffsetPx - stepPx, false);
         requestAnimationFrame(() => setListTransform(0, true));
       }
@@ -598,10 +579,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const finish = () => {
         setListTransform(0, false);
 
-        // 큰 카드 업데이트
         setBigData(prevBig);
 
-        // progress: 한 칸 왼쪽 이동
         activeIndex = (activeIndex - 1 + getTotalSteps()) % getTotalSteps();
         syncProgress();
 
@@ -634,16 +613,11 @@ document.addEventListener('DOMContentLoaded', () => {
     nextBtn.addEventListener('click', () => goNext({ fromButton: true, startOffsetPx: 0 }));
     prevBtn.addEventListener('click', () => goPrev({ fromButton: true, startOffsetPx: 0 }));
 
-    // 자동 재생(원치 않으면 startAutoplay() 호출을 제거)
     startAutoplay();
 
-    // hover 시 자동 재생 pause
     bestSection.addEventListener('mouseenter', stopAutoplay);
     bestSection.addEventListener('mouseleave', startAutoplay);
 
-    // =========================
-    // Drag to slide (스크롤 느낌)
-    // =========================
     let dragging = false;
     let dragStartX = 0;
     let dragOffsetX = 0;
@@ -660,7 +634,6 @@ document.addEventListener('DOMContentLoaded', () => {
       viewport.classList.add('is-dragging');
       stopAutoplay();
 
-      // transition 제거 후 즉시 이동 준비
       list.style.transition = 'none';
       viewport.setPointerCapture(e.pointerId);
     });
@@ -670,9 +643,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
       dragOffsetX = e.clientX - dragStartX;
 
-      // 너무 과하게 끌리지 않도록 살짝 제한
       const clamp = stepPx ? Math.max(-stepPx * 1.1, Math.min(stepPx * 1.1, dragOffsetX)) : dragOffsetX;
-      dragOffsetX = clamp; // ✅ 화면에 실제 적용된 값으로 동기화(릴리즈 시 점프 방지)
+      dragOffsetX = clamp;
       list.style.transform = `translate3d(${clamp}px,0,0)`;
     });
 
@@ -684,13 +656,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const dx = dragOffsetX;
 
-      // ✅ 스와이프 방향에 따라 이전/다음
       if (dx <= -thresholdPx) {
         goNext({ fromButton: true, startOffsetPx: dx });
       } else if (dx >= thresholdPx) {
         goPrev({ fromButton: true, startOffsetPx: dx });
       } else {
-        // 원위치로 스냅
         list.style.transition = `transform 220ms ${easing}`;
         list.style.transform = 'translate3d(0,0,0)';
         restartAutoplay();
@@ -701,6 +671,7 @@ document.addEventListener('DOMContentLoaded', () => {
     viewport.addEventListener('pointercancel', endDrag);
   };
 
+  initHeaderAutoHide();
   initMainVisual();
   initAOS();
   initNewSection();

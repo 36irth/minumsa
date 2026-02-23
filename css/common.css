@@ -52,6 +52,11 @@ html {
    font-weight: 700;
 }
 
+::selection {
+  background: #039669;
+  color: #fff;
+}
+
 
 
 
@@ -69,6 +74,13 @@ header {
    --header-fixed-top: 0px;
    --panel-gap: 12px;
    overflow: visible;
+
+   will-change: transform;
+   transition: transform 520ms cubic-bezier(0.22, 0.61, 0.36, 1);
+}
+
+header.is-hidden{
+  transform: translateY(-100%);
 }
 
 header>.inner {
@@ -198,7 +210,7 @@ header .gnb>li>ul.sub::before {
    top: var(--panel-gap);
    bottom: 0;
 
-   background: rgba(0, 0, 0, .8);
+   background: rgba(0, 0, 0, .85);
    border-radius: 10px;
    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
    backdrop-filter: blur(15px);
@@ -212,8 +224,6 @@ header .gnb>li:focus-within>ul.sub {
    visibility: visible;
    transform: translateY(0);
    transition-delay: 0s;
-
-
    pointer-events: auto;
 }
 
