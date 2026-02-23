@@ -1,0 +1,954 @@
+@charset "utf-8";
+
+.main_visual {
+   height: 780px;
+   position: relative;
+}
+
+.main_visual .swiper {
+   width: 100%;
+   height: 100%;
+   position: relative;
+}
+
+.main_visual .swiper li {
+   width: 100%;
+   height: 700px;
+   display: flex;
+   align-items: center;
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+   color: #fff;
+}
+
+.main_visual .swiper li .inner {
+   justify-content: flex-end;
+}
+
+.main_visual .swiper li.slide1 {
+   background-image: url(../img/main_visual/slide1.jpg);
+}
+
+.main_visual .swiper li.slide2 {
+   background-image: url(../img/main_visual/slide2.jpg);
+}
+
+.main_visual .swiper li.slide3 {
+   background: paleturquoise;
+}
+
+.main_visual .swiper li.slide4 {
+   background: palevioletred;
+}
+
+.main_visual .swiper li .inner {
+   width: 100%;
+   height: 100%;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 0 20px;
+   display: flex;
+   align-items: center;
+}
+
+.main_visual .swiper li .txt_area {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   flex-shrink: 0;
+   position: absolute;
+   left: 50%;
+}
+
+li.slide2 .txt_area {
+   color: #222;
+}
+
+.sub_txt {
+   font-weight: 200;
+   font-size: 20px;
+   line-height: 100%;
+   text-transform: capitalize;
+}
+
+.sub_txt span {
+   font-weight: 300;
+}
+
+.txt_area .tit {
+   font-size: 48px;
+   font-weight: 600;
+   line-height: 1.3;
+   text-transform: capitalize;
+   margin: 25px 0 40px;
+}
+
+.txt_area .tit span {
+   font-size: 25px;
+   font-weight: 400;
+}
+
+.txt_area .tit p {
+   font-weight: 500;
+}
+
+.txt_area .tit em {
+   font-weight: 700;
+}
+
+.txt_area .txt {
+   font-size: 24px;
+   font-weight: 300;
+   line-height: 150%;
+}
+
+.txt_area .txt span {
+   font-weight: 600;
+   margin-right: 20px;
+}
+
+.txt_area .txt p {
+   font-weight: 400;
+}
+
+.main_visual .pager {
+   position: absolute;
+   bottom: 21%;
+   left: 50%;
+   transform: translateX(-50%);
+   width: 200px;
+   height: 3px;
+   z-index: 100;
+}
+
+.main_visual .pager .progress_track {
+   width: 100%;
+   height: 3px;
+   background: rgba(255, 255, 255, 0.3);
+   border-radius: 2px;
+}
+
+.main_visual .pager .progress_fill {
+   height: 100%;
+   width: 25%;
+   background: #fff;
+   border-radius: 2px;
+   transition: width 0.4s ease;
+}
+
+.search_bar {
+   position: relative;
+   margin-top: -7.2rem;
+   z-index: 10;
+}
+
+.search_bar .inner {
+   max-width: 950px;
+   margin: 0 auto;
+   background: #fff;
+   border-radius: 50px;
+   display: flex;
+   align-items: center;
+   padding: 22px 28px;
+   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
+}
+
+.search_bar input {
+   flex: 1;
+   border: none;
+   outline: none;
+   font-size: 16px;
+   color: #333;
+}
+
+.search_bar input::placeholder {
+   color: #aaa;
+}
+
+.search_bar button {
+   border: none;
+   background: transparent;
+   font-size: 1.4rem;
+   color: #555;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+}
+
+
+
+
+
+
+
+/* new */
+.new {
+   --card-w: 220px;
+   --card-h: 485px;
+   --photo-h: 311px;
+   --text-h: 174px;
+   --gap: 60px;
+   padding: 80px 0 110px;
+}
+
+.section_head {
+   display: flex;
+   justify-content: space-between;
+   align-items: flex-end;
+   padding-bottom: 4.2rem;
+}
+
+.section_title {
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+}
+
+.label {
+   display: inline-block;
+   font-size: 1.3rem;
+   color: #999;
+}
+
+.secTitle {
+   margin: 0;
+   line-height: 130%;
+   font-size: 2.8rem;
+}
+
+.new_more {
+   display: inline-block;
+   padding: 10px 23px;
+   border: 1px solid rgba(0, 0, 0, .3);
+   box-shadow: 0 2px 10px rgba(0, 0, 0, .09);
+   border-radius: 50px;
+}
+
+.new_viewport {
+   touch-action: pan-y;
+   margin-top: 20px;
+   overflow: hidden;
+   padding: 20px 0;
+}
+
+.new_viewport::-webkit-scrollbar {
+   display: none;
+}
+
+.new_viewport {
+   scrollbar-width: none;
+}
+
+.new_track {
+   display: flex;
+   gap: var(--gap);
+   align-items: flex-start;
+   will-change: transform;
+}
+
+.new_card {
+   flex: 0 0 auto;
+   width: var(--card-w);
+   height: var(--card-h);
+   position: relative;
+   background: #fff;
+   transition: transform 160ms ease;
+   will-change: transform;
+
+   outline: 1px solid rgba(0, 0, 0, .7);
+   outline-offset: -1px;
+   cursor: pointer;
+}
+
+.new_photo {
+   width: 100%;
+   height: var(--photo-h);
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: 100% 100%;
+
+}
+
+.new_card .photo1 {
+   background-image: url('../img/cover/smj_pcd.jpg');
+}
+
+.new_card .photo2 {
+   background-image: url('../img/cover/ysmtbnn.jpg');
+}
+
+.new_card .photo3 {
+   background-image: url('../img/cover/smj_osm.jpg');
+}
+
+.new_card .photo4 {
+   background-image: url('../img/cover/smj_rcd.jpg');
+}
+
+.new_card .photo5 {
+   background-image: url('../img/cover/poem_nhn.jpg');
+}
+
+.new_card .photo6 {
+   background-image: url('../img/cover/cmdwd.jpg');
+}
+
+.new_card .photo7 {
+   background-image: url('../img/cover/kr_keh.jpg');
+}
+
+.new_card .photo8 {
+   background-image: url('../img/cover/poem_kid.jpg');
+}
+
+.new_card .photo9 {
+   background-image: url('../img/cover/tg_poem.jpg');
+}
+
+.new_card .photo10 {
+   background-image: url('../img/cover/smj_bgna.jpg');
+}
+
+.new_card .photo11 {
+   background-image: url('../img/cover/naya.jpg');
+}
+
+.new_text {
+   position: absolute;
+   left: 0;
+   right: 0;
+   bottom: 0;
+
+   width: 100%;
+   height: var(--text-h);
+   background: #fff;
+   box-sizing: border-box;
+
+   transition: height 260ms ease;
+
+   padding: 1.6rem;
+   border: 1px solid #222;
+}
+
+.tag {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+
+   padding: 2px 5px;
+   border: 1px solid #222;
+   font-size: 0.85rem;
+   font-weight: 300;
+   line-height: 1;
+   box-sizing: border-box;
+   background: #fff;
+
+   width: fit-content;
+   max-width: 100%;
+   flex: 0 0 auto;
+   align-self: flex-start;
+   white-space: nowrap;
+}
+
+.new_text p.new_tit {
+   padding-top: 23px;
+   font-weight: 500;
+   font-size: 1.18rem;
+   line-height: 150%;
+}
+
+.new_text p {
+   margin: 0;
+   padding-top: 10px;
+}
+
+.new_desc {
+   opacity: 0;
+   transform: translateY(10px);
+   max-height: 0;
+   overflow: hidden;
+   transition: opacity 200ms ease, transform 200ms ease, max-height 200ms ease;
+}
+
+.new_card.is-hover {
+   transform: scale(1.05);
+   z-index: 10;
+}
+
+.new_card.is-hover .new_text {
+   height: var(--card-h);
+   line-height: 160%;
+}
+
+.new_card.is-hover .new_desc {
+   opacity: 1;
+   transform: translateY(0);
+   max-height: 240px;
+   margin-top: 12px;
+}
+
+
+.new_viewport {
+   width: 100vw;
+   margin-left: calc(50% - 50vw);
+   padding-left: calc(50vw - 50%);
+   overflow: hidden;
+   padding-top: 30px;
+   padding-bottom: 30px;
+   box-sizing: border-box;
+}
+
+.new_viewport.is-dragging {
+   cursor: grabbing;
+}
+
+.new_viewport.is-dragging,
+.new_viewport.is-dragging * {
+   user-select: none;
+}
+
+
+
+
+
+
+
+/* best */
+.best {
+   padding: 0 0 120px;
+}
+
+.best_row {
+   display: flex;
+   align-items: flex-start;
+   gap: 5rem;
+   align-items: stretch;
+}
+
+.best_feature {
+   display: flex;
+   width: 610px;
+   height: 410px;
+   background: #fff;
+   border: 1px solid #222;
+   transition: opacity 180ms ease;
+}
+
+.best_feature.is-changing {
+   opacity: 0;
+}
+
+.best_feature_photo {
+   width: 275px;
+   height: 100%;
+   background: #ccc;
+   border-right: 1px solid #222;
+
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+}
+
+.best_feature_body {
+   flex: 1;
+   padding: 18px 20px 16px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   gap: 20px;
+}
+
+.best_txtbox {
+   display: flex;
+   flex-direction: column;
+   gap: 1.1rem;
+}
+
+.best_txtbox p {
+   line-height: 160%;
+}
+
+.best_rank {
+   margin: 0;
+   font-family: 'BookkMyungjo';
+   font-size: 1.8rem;
+   font-weight: 700;
+   line-height: 150%;
+   color: #222;
+   border-bottom: 1px solid #222;
+   padding-bottom: 5px;
+}
+
+.best_title {
+   margin: 0;
+   font-size: 1.6rem;
+   font-weight: 700;
+   color: #222;
+   padding-top: 5px;
+}
+
+.best_author {
+   margin: 0;
+   font-size: 1.4rem;
+   color: #222;
+}
+
+.best_copy {
+   font-size: 1.05rem;
+   line-height: 150%;
+   color: #222;
+   height: 100%;
+}
+
+.best_more {
+   align-self: flex-start;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: 7px 14px;
+   border: 1px solid #222;
+   border-radius: 999px;
+   font-size: 0.8rem;
+}
+
+.best_side {
+   flex: 1;
+   min-width: 0;
+   display: flex;
+   flex-direction: column;
+}
+
+.best_side_top {
+   display: flex;
+   align-items: center;
+   gap: 14px;
+}
+
+.best_prev,
+.best_next {
+   width: 40px;
+   height: 40px;
+   border: 1px solid #fff;
+   background: #fff;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   cursor: pointer;
+   flex: 0 0 auto;
+}
+
+.best_prev i,
+.best_next i {
+   font-size: 30px;
+   color: #222;
+}
+
+.best_viewport {
+   touch-action: pan-y;
+   flex: 1;
+   min-width: 0;
+   overflow: hidden;
+   cursor: grab;
+}
+
+.best_viewport.is-dragging {
+   cursor: grabbing;
+}
+
+.best_viewport.is-dragging,
+.best_viewport.is-dragging * {
+   user-select: none;
+}
+
+.best_list {
+   display: flex;
+   justify-content: flex-start;
+   align-items: flex-start;
+   gap: 40px;
+   margin: 0;
+   padding: 0;
+   list-style: none;
+
+   will-change: transform;
+   transform: translate3d(0, 0, 0);
+}
+
+.best_card {
+   flex: 0 0 auto;
+   width: 10rem;
+   height: 335px;
+   box-sizing: border-box;
+}
+
+
+.best_card_link {
+   display: flex;
+   flex-direction: column;
+   height: 100%;
+   text-decoration: none;
+   color: inherit;
+
+   box-sizing: border-box;
+}
+
+.best_card_photo {
+   width: 100%;
+   height: 235px;
+   background: #ccc;
+   border: 1px solid #222;
+
+   box-sizing: border-box;
+
+   background-repeat: no-repeat;
+   background-position: center;
+   background-size: cover;
+}
+
+.best_card_text {
+   flex: 1;
+   min-height: 0;
+
+   padding: 12px 12px;
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+
+   box-sizing: border-box;
+}
+
+.best_card_title {
+   margin: 0;
+   font-size: 1.05rem;
+   font-weight: 600;
+   line-height: 1.35;
+
+   white-space: normal;
+   text-overflow: clip;
+   overflow: visible;
+   overflow-wrap: anywhere;
+   word-break: keep-all;
+}
+
+.best_card_author {
+   margin: 0;
+   font-size: 0.95rem;
+   line-height: 1.35;
+
+   white-space: normal;
+   text-overflow: clip;
+   overflow: visible;
+   overflow-wrap: anywhere;
+   word-break: keep-all;
+}
+
+.best_line {
+   position: relative;
+   margin-top: 28px;
+   width: 100%;
+   height: 1px;
+   background: rgba(0, 0, 0, 0.15);
+   margin-top: auto;
+}
+
+.best_line_fill {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 54px;
+   height: 2px;
+   background: #222;
+
+   will-change: transform, width;
+   transition: transform 300ms ease;
+}
+
+
+
+/* intro */
+.intro.pick {
+   background: #f3f3f3;
+   width: 100vw;
+   margin-left: calc(50% - 50vw);
+   padding: 110px 0 95px;
+}
+
+.intro.pick .pick_inner {
+   max-width: 1440px;
+   margin: 0 auto;
+   padding: 70px 0;
+}
+
+.intro.pick .pick_top {
+   display: grid;
+   grid-template-columns: 1fr auto 1fr;
+   align-items: center;
+   gap: 64px;
+}
+
+.pick_title {
+   margin: 0;
+   font-size: 2.7rem;
+   line-height: 150%;
+   letter-spacing: -1%;
+   color: #222;
+   align-self: start;
+   text-align: right;
+   font-family: 'BookkMyungjo';
+   font-weight: 700;
+}
+
+.pick_copy {
+   margin: 0;
+   font-size: 2.7rem;
+   line-height: 150%;
+   letter-spacing: -1%;
+   color: #222;
+   text-align: left;
+   align-self: end;
+   font-family: 'BookkMyungjo';
+   font-weight: 700;
+}
+
+.pick_books {
+   display: flex;
+   gap: 20px;
+}
+
+.pick_book {
+   width: 180px;
+   height: 255px;
+   background: #fff;
+   border: 1px solid rgba(0, 0, 0, .6);
+   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+   overflow: hidden;
+}
+
+.pick_books .pick_book {
+   background-size: cover;
+   background-position: center;
+   background-repeat: no-repeat;
+}
+
+.pick_books .pick_book:first-child {
+   background-image: url(../img/cover/intro1.jpg);
+   width: 227px;
+   height: 390px;
+}
+
+.pick_books .pick_book:nth-child(2) {
+   background-image: url(../img/cover/intro2.jpg);
+   width: 237px;
+   height: 390px;
+}
+
+.pick_books .pick_book:nth-child(3) {
+   background-image: url(../img/cover/intro3.jpg);
+   width: 271px;
+   height: 390px;
+}
+
+.intro.pick .pick_bottom {
+   margin-top: 55px;
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   text-align: center;
+}
+
+.pick_desc {
+   margin: 0;
+   font-size: 1.5rem;
+   line-height: 1.7;
+   color: rgba(0, 0, 0, .8);
+   text-align: center;
+}
+
+.pick_btn {
+   margin-top: 55px;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: 10px 18px;
+   border: 1px solid rgba(0, 0, 0, .6);
+   border-radius: 999px;
+   background: #fff;
+   font-size: 1.1rem;
+   color: #222;
+   text-decoration: none;
+}
+
+.pick_btn:hover {
+   background: rgba(255, 255, 255, 0.7);
+}
+
+
+
+
+
+/* event */
+/* =========================
+   EVENT 배너(풀블리드)
+   - 100vw 없이: HTML에서 .event를 .inner 바깥으로 빼서 width:100%로 처리
+   ========================= */
+.event {
+   margin: 80px 0;
+}
+
+.event_banner {
+   display: block;
+   width: 100%;
+   height: 100%;
+   overflow: hidden;
+}
+
+.event_banner img {
+   display: block;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+}
+
+
+
+
+
+/* =========================
+   BOARD | 블로그 · 연재 · 민음사 소식
+   (wireframe와 동일한 3컬럼 리스트)
+   ========================= */
+
+/* 접근성: 화면에는 숨기고(스크린리더에는 노출) */
+.blind {
+   position: absolute;
+   width: 1px;
+   height: 1px;
+   margin: -1px;
+   padding: 0;
+   overflow: hidden;
+   clip: rect(0, 0, 0, 0);
+   border: 0;
+   white-space: nowrap;
+}
+
+.board {
+   padding: 70px 0 90px;
+}
+
+.board_row {
+   display: flex;
+   align-items: flex-start;
+   gap: 60px;
+}
+
+/* 좌/중 컬럼은 유연하게, 우측(민음사 소식)은 조금 더 좁게 */
+.board_col {
+   flex: 1;
+   min-width: 0;
+}
+
+.board_col.board_news {
+   flex: 0 0 240px;
+}
+
+.board_col_head {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 12px;
+   padding-bottom: 12px;
+   border-bottom: 1px solid rgba(0, 0, 0, .25);
+}
+
+.board_tit {
+   margin: 0;
+   font-size: 2.2rem;
+   font-weight: 600;
+   line-height: 1.5;
+   font-family: 'BookkMyungjo';
+}
+
+.board_more {
+   font-size: .86rem;
+   color: rgba(0, 0, 0, .55);
+   text-decoration: none;
+   white-space: nowrap;
+}
+
+.board_more:hover {
+   text-decoration: underline;
+}
+
+/* 목록 */
+.board_list {
+   margin: 0;
+   padding: 10px 0 14px;
+   list-style: none;
+   border-bottom: 1px solid rgba(0, 0, 0, .25);
+}
+
+.board_list li {
+   padding: 7px 0;
+}
+
+.board_list a {
+   display: grid;
+   grid-template-columns: 1fr auto;
+   align-items: center;
+   gap: 22px;
+   color: #222;
+   text-decoration: none;
+}
+
+.board_item_tit {
+   overflow: hidden;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   font-size: .93rem;
+   line-height: 1.35;
+}
+
+.board_item_date {
+   font-size: .85rem;
+   color: rgba(0, 0, 0, .55);
+   white-space: nowrap;
+}
+
+/* 우측: 민음사 소식(공지사항/자료실) */
+.board_news_block {
+   margin-top: 28px;
+}
+
+.board_sub_head {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 12px;
+   padding-bottom: 12px;
+   border-bottom: 1px solid rgba(0, 0, 0, .25);
+}
+
+.board_sub_tit {
+   margin: 0;
+   font-size: 1rem;
+   font-weight: 600;
+   line-height: 1;
+}
+
+.board_col_head .board_tit,
+.board_sub_head .board_sub_head,
+.board_sub_head .board_sub_head {
+   font-size: 1.7rem;
+}
+
+/* 반응형: 좁은 화면에서는 세로로 쌓기 */
+@media (max-width: 900px) {
+   .board_row {
+      flex-direction: column;
+      gap: 36px;
+   }
+
+   .board_col.board_news {
+      flex: 1;
+   }
+}

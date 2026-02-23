@@ -1,0 +1,30 @@
+@charset "utf-8";
+
+@media (max-width: 980px) {
+    .intro.pick .pick_top {
+        grid-template-columns: 1fr;
+        gap: 24px;
+        text-align: center;
+    }
+
+    .pick_title {
+        justify-self: center;
+    }
+
+    .pick_copy {
+        justify-self: center;
+        text-align: center;
+    }
+
+    .pick_books {
+        margin-top: 10px;
+    }
+
+    .pick_book:nth-child(1) {
+        margin-right: -12px;
+    }
+
+    .pick_book:nth-child(3) {
+        margin-left: -12px;
+    }
+}
