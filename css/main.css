@@ -220,9 +220,10 @@ li.slide2 .txt_area {
 .new_more {
    display: inline-block;
    padding: 10px 23px;
-   border: 1px solid rgba(0, 0, 0, .3);
+   border: 1px solid rgba(3,150,105,.8);
    box-shadow: 0 2px 10px rgba(0, 0, 0, .09);
    border-radius: 50px;
+   color: #039669;
 }
 
 .new_viewport {
@@ -336,7 +337,7 @@ li.slide2 .txt_area {
    align-items: center;
    justify-content: center;
 
-   padding: 2px 5px;
+   padding: 4px 5px;
    border: 1px solid #222;
    font-size: 0.85rem;
    font-weight: 300;
@@ -416,7 +417,7 @@ li.slide2 .txt_area {
 
 /* best */
 .best {
-   padding: 0 0 120px;
+   padding: 0 0 240px;
 }
 
 .best_row {
@@ -653,11 +654,11 @@ li.slide2 .txt_area {
 
 .best_line_fill {
    position: absolute;
-   top: 0;
+   top: -1px;
    left: 0;
    width: 54px;
-   height: 2px;
-   background: #222;
+   height: 3px;
+   background: #039669;
 
    will-change: transform, width;
    transition: transform 300ms ease;
@@ -667,7 +668,7 @@ li.slide2 .txt_area {
 
 /* intro */
 .intro.pick {
-   background: #f3f3f3;
+   background-image: url(../img/intro_bg.jpg);
    width: 100vw;
    margin-left: calc(50% - 50vw);
    padding: 110px 0 95px;
@@ -770,16 +771,17 @@ li.slide2 .txt_area {
    align-items: center;
    justify-content: center;
    padding: 10px 18px;
-   border: 1px solid rgba(0, 0, 0, .6);
+   border: 1px solid rgba(3,150,105,.8);
+   box-shadow: 0 2px 10px rgba(0, 0, 0, .09);
    border-radius: 999px;
    background: #fff;
    font-size: 1.1rem;
-   color: #222;
+   color: #039669;
    text-decoration: none;
 }
 
 .pick_btn:hover {
-   background: rgba(255, 255, 255, 0.7);
+   background: rgba(255, 255, 255, .4);
 }
 
 
@@ -787,14 +789,6 @@ li.slide2 .txt_area {
 
 
 /* event */
-/* =========================
-   EVENT 배너(풀블리드)
-   - 100vw 없이: HTML에서 .event를 .inner 바깥으로 빼서 width:100%로 처리
-   ========================= */
-.event {
-   margin: 80px 0;
-}
-
 .event_banner {
    display: block;
    width: 100%;
@@ -813,11 +807,43 @@ li.slide2 .txt_area {
 
 
 
-/* =========================
-   BOARD | 블로그 · 연재 · 민음사 소식
-   (wireframe와 동일한 3컬럼 리스트)
-   ========================= */
 
+/* banner */
+.banner {
+   display: flex;
+   padding-block: 150px 80px;
+   gap: 0;
+}
+
+.ban_one, .ban_lit {
+   flex: 1;
+   cursor: pointer;
+}
+
+.ban_one {
+   background-image: url(../img/one_ban.png);
+   width: 740px;
+   height: 453px;
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+.ban_lit {
+   background-image: url(../img/lit_ban.png);
+   width: 740px;
+   height: 453px;
+   background-size: contain;
+   background-repeat: no-repeat;
+}
+
+
+
+
+
+
+
+
+/* board */
 /* 접근성: 화면에는 숨기고(스크린리더에는 노출) */
 .blind {
    position: absolute;
@@ -832,29 +858,31 @@ li.slide2 .txt_area {
 }
 
 .board {
-   padding: 70px 0 90px;
+   padding: 120px 0;
 }
 
 .board .board_row{
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr)); /* ✅ 1:1:1 */
-  gap: 60px; /* 원하는 간격으로 조절 */
+  gap: 90px;
   align-items: start;
+  height: 100%;
 }
 
-/* ✅ 내용이 길어서 컬럼 폭이 밀리는 것 방지 */
 .board .board_row > *{
   min-width: 0;
 }
 
-/* 좌/중 컬럼은 유연하게, 우측(민음사 소식)은 조금 더 좁게 */
 .board_col {
    flex: 1;
    min-width: 0;
 }
 
 .board_col.board_news {
-   flex: 0 0 240px;
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   height: 100%;
 }
 
 .board_col_head {
@@ -864,6 +892,10 @@ li.slide2 .txt_area {
    gap: 12px;
    padding-bottom: 12px;
    border-bottom: 1px solid rgba(0, 0, 0, .25);
+}
+
+.board_col.board_news .board_col_head {
+   padding-block: 7px 12px;
 }
 
 .board_tit {
@@ -892,16 +924,16 @@ li.slide2 .txt_area {
    text-decoration: underline;
 }
 
-/* 목록 */
 .board_list {
    margin: 0;
-   padding: 10px 0 14px;
+   padding: 20px 0;
    list-style: none;
    border-bottom: 1px solid rgba(0, 0, 0, .25);
+   font-size: 1.1rem;
 }
 
 .board_list li {
-   padding: 7px 0;
+   padding: 10px 3px;
 }
 
 .board_list a {
@@ -917,17 +949,14 @@ li.slide2 .txt_area {
    overflow: hidden;
    text-overflow: ellipsis;
    white-space: nowrap;
-   font-size: .93rem;
    line-height: 1.35;
 }
 
 .board_item_date {
-   font-size: .85rem;
    color: rgba(0, 0, 0, .55);
    white-space: nowrap;
 }
 
-/* 우측: 민음사 소식(공지사항/자료실) */
 .board_news_block {
    margin-top: 28px;
 }
@@ -954,8 +983,7 @@ li.slide2 .txt_area {
    font-size: 1.7rem;
 }
 
-/* 반응형: 좁은 화면에서는 세로로 쌓기 */
-@media (max-width: 900px) {
+/* @media (max-width: 900px) {
    .board_row {
       flex-direction: column;
       gap: 36px;
@@ -963,5 +991,171 @@ li.slide2 .txt_area {
 
    .board_col.board_news {
       flex: 1;
+   }
+} */
+
+
+
+
+
+
+/* channel */
+.channel {
+   padding: 70px 0 110px;
+   width: 100vw;
+   margin-left: calc(50% - 50vw);
+}
+
+.channel .channel_inner {
+   max-width: 1440px;
+   margin: 0 auto;
+   padding: 0 20px;
+}
+
+.channel .secTitle {
+   padding-bottom: 4.3rem;
+}
+
+/* 전체 프레임 */
+.channel_frame {
+   width: 1440px;
+   max-width: 100%;
+   box-sizing: border-box;
+
+   display: grid;
+   grid-template-columns: repeat(3, 450px) 90px; /* ✅ 450x316 카드 3개 + 아이콘 컬럼 */
+   grid-template-rows: 316px 63px; /* ✅ 상단(영상+제목) 316px + 하단 바로가기 63px */
+   gap: 0;
+
+   border: 1px solid #222; /* ✅ 모든 박스 border #222 */
+   background: #fff;
+}
+
+/* 영상 카드 (썸네일 + 제목) */
+.channel_video {
+   height: 316px;
+   display: grid;
+   grid-template-rows: 253px 63px; /* 316 = 253(썸네일) + 63(제목) */
+   text-decoration: none;
+   color: #222;
+   box-sizing: border-box;
+
+   border-right: 1px solid #222;
+}
+
+.channel_video:last-of-type {
+   border-right: 0;
+}
+
+.channel_media {
+   background: #ccc;
+   position: relative;
+   overflow: hidden;
+}
+
+.channel_media iframe {
+   width: 100%;
+   height: 100%;
+   border: 0;
+   display: block;
+}
+
+.channel_caption {
+   display: flex;
+   align-items: center;
+   padding: 0 12px;
+   box-sizing: border-box;
+
+   border-top: 1px solid #222;
+   font-size: 0.92rem;
+   line-height: 1.2;
+}
+
+/* 아이콘 컬럼 */
+.channel_social {
+   grid-column: 4;
+   grid-row: 1;
+
+   width: 90px;
+   height: 316px;
+   display: grid;
+   grid-template-rows: repeat(4, 79px); /* ✅ 90x79 */
+
+   border-left: 1px solid #222;
+   box-sizing: border-box;
+}
+
+.channel_social_item {
+   width: 90px;
+   height: 79px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   text-decoration: none;
+   color: #222;
+   background: #fff;
+
+   border-bottom: 1px solid #222;
+   box-sizing: border-box;
+}
+
+.channel_social_item:last-child {
+   border-bottom: 0;
+}
+
+.channel_social_item.is_primary {
+   background: #222;
+   color: #fff;
+}
+
+.channel_social_item i {
+   font-size: 22px;
+   line-height: 1;
+}
+
+.channel_nav {
+   grid-column: 1 / -1;
+   grid-row: 2;
+
+   height: 63px; /* ✅ 바로가기 height 63px */
+   display: grid;
+   grid-template-columns: 1fr 1fr; /* ✅ 1:1 */
+
+   border-top: 1px solid #222;
+   box-sizing: border-box;
+}
+
+.channel_nav_item {
+   height: 63px;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 0 16px;
+
+   text-decoration: none;
+   color: #222;
+   box-sizing: border-box;
+
+   border-right: 1px solid #222;
+}
+
+.channel_nav_item:last-child {
+   border-right: 0;
+}
+
+.channel_nav_item::after {
+   content: "↗";
+   font-size: 0.95rem;
+}
+
+.channel_nav_item:first-child {
+   background: #0f7a4f;
+   color: #fff;
+}
+
+@media (max-width: 1500px) {
+   .channel_frame {
+      overflow-x: auto;
    }
 }
