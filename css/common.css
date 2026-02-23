@@ -1,561 +1,276 @@
 @charset "utf-8";
 
+@import url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css');
+
+@font-face {
+   font-family: 'BookkMyungjo';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Lt.woff2') format('woff2');
+   font-weight: 400;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'BookkMyungjo';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Bd.woff2') format('woff2');
+   font-weight: 700;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'BookkGothic';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkGothic-Lt.woff2') format('woff2');
+   font-weight: 300;
+   font-display: swap;
+}
+
+@font-face {
+   font-family: 'BookkGothic';
+   src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkGothic-Bd.woff2') format('woff2');
+   font-weight: 700;
+   font-display: swap;
+}
+
+
+
+
+html {
+   font-family: 'SUIT', sans-serif;
+}
+
 .inner {
    width: 75%;
    margin-inline: auto;
 }
 
-
-/* header */
-header {
-   width: 100%;
-   height: 72px;
-   position: fixed;
-   top: 0;
-   left: 0;
-   z-index: 1000;
-   background: rgba(255, 255, 255, .3);
-}
-
-header .inner {
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   position: relative;
-   z-index: 101;
-   height: 100%;
-}
-
-header h1 {
-   font-size: 1.5rem;
+.secTitle {
+   font-family: 'BookkMyungjo';
    font-weight: 700;
-   display: flex;
-   align-items: center;
-   height: 100%;
 }
 
-header h1 a {
-   display: flex;
-   align-items: center;
+.label {
+   font-family: 'BookkGothic';
+   font-weight: 700;
 }
 
-header nav {
-   flex: 1;
-   display: flex;
-   justify-content: center;
-   align-items: center;
-}
 
-header nav .gnb {
-   display: flex;
-   gap: 120px;
-   align-items: center;
-}
 
-header nav .gnb>li {
-   position: relative;
-}
 
-header nav .gnb>li>a {
-   display: block;
-   padding: 10px 0;
-   font-weight: 500;
-}
 
-header nav .gnb::before {
-   content: '';
-   display: none;
-   position: absolute;
-   top: 100%;
-   left: 50%;
-   transform: translateX(-50%);
-   width: 100vw;
-   z-index: 99;
-}
-
-header nav .gnb:hover::before {
-   display: block;
-}
-
-header nav .gnb .sub {
-   display: none;
-   position: absolute;
-   top: 100%;
-   left: 0;
-   padding-top: 30px;
-   padding-bottom: 40px;
-   min-width: 180px;
-   z-index: 100;
-}
-
-header nav .gnb:hover .sub {
-   display: block;
-}
-
-header nav .gnb .sub>li {
-   position: relative;
-   margin-bottom: 5px;
-}
-
-header nav .gnb .sub>li>a {
-   display: block;
-   padding: 6px 0;
-   font-weight: 600;
-   font-size: 0.95rem;
-   line-height: 160%;
-}
-
-header nav .gnb>li:nth-child(3) .sub>li,
-header nav .gnb>li:nth-child(4) .sub>li,
-header nav .gnb>li:nth-child(5) .sub>li {
-   margin-bottom: 3px;
-}
-
-header nav .gnb>li:nth-child(3) .sub>li>a,
-header nav .gnb>li:nth-child(4) .sub>li>a,
-header nav .gnb>li:nth-child(5) .sub>li>a {
-   padding: 4px 0;
-}
-
-header nav .gnb>li:nth-child(4) .sub>li,
-header nav .gnb>li:nth-child(5) .sub>li,
-header nav .gnb>li:nth-child(6) .sub>li {
-   padding-bottom: 5px;
-}
-
-header nav .gnb .sub2 {
-   display: block;
-   padding-left: 0;
-   padding-bottom: 15px;
-}
-
-header nav .gnb .sub2 li {
-   padding: 5px 0;
-}
-
-header nav .gnb .sub2 li a {
-   display: block;
-   font-weight: 400;
-   font-size: 0.88rem;
-}
-
-header .icons {
-   display: flex;
-   align-items: center;
-}
-
-header .icons ul {
-   display: flex;
-   gap: 60px;
-   align-items: center;
-}
-
-header .icons ul li a {
-   display: flex;
-   align-items: center;
-   font-size: 1.4rem;
-}
-
-/* ================================
-   dcamp-style header override
-   common.css 맨 아래에 붙여넣기
-=================================== */
-
-/* 헤더 전체: 화면 상단에 떠있는 느낌(여백 + 투명) */
 header {
-   width: 100%;
-   height: auto;
-   /* 기존 72px 고정값 덮어씀 */
    position: fixed;
-   top: 20px;
-   /* 상단 여백 */
-   left: 0;
-   z-index: 1000;
-   background: transparent;
-   /* 바깥은 투명 */
-}
-
-/* 검정 라운드 바(핵심) */
-header .inner {
-   /* 기존 .inner(75%) 영향 없이, 헤더만 넓게 */
-   width: min(1440px, calc(100% - 64px));
-   /* 좌우 여백 32px씩 */
-   height: 64px;
-   margin: 0 auto;
-
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
-   position: relative;
-
-   padding: 0 28px;
-   box-sizing: border-box;
-
-   background: rgba(0, 0, 0, 0.4);
-   border-radius: 18px;
-
-   /* 유리 느낌(지원되는 브라우저에서만) */
-   backdrop-filter: blur(12px);
-   -webkit-backdrop-filter: blur(12px);
-
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.21);
-}
-
-/* 로고(텍스트라면 오렌지) */
-header h1 {
-   height: 100%;
-   display: flex;
-   align-items: center;
-   font-size: 1.5rem;
-   font-weight: 800;
-}
-
-header h1 a {
-   display: flex;
-   align-items: center;
-   height: 100%;
-   letter-spacing: -0.02em;
-}
-
-/* 로고가 이미지일 때 대비 */
-/* header h1 a img{
-  display: block;
-  height: 26px;
-} */
-
-/* ✅ 메뉴 가운데 정렬 유지 (기존 구조 그대로) */
-header nav {
-   flex: 1;
-   display: flex;
-   justify-content: center;
-   /* 가운데 */
-   align-items: center;
-}
-
-/* 메뉴 간격(너무 벌어지지 않게 반응형) */
-header nav .gnb {
-   display: flex;
-   align-items: center;
-   gap: clamp(24px, 4vw, 96px);
-}
-
-/* 상단 메뉴 텍스트 컬러 */
-header nav .gnb>li>a {
-   display: block;
-   padding: 10px 0;
-   font-weight: 600;
-   color: rgba(255, 255, 255, 0.9);
-   transition: color .2s ease, opacity .2s ease;
-}
-
-header nav .gnb>li>a:hover {
-   color: #fff;
-}
-
-/* (선택) 현재 페이지 메뉴 강조하고 싶으면 a에 class="is-active" 주기 */
-header nav .gnb>li>a.is-active {
-   color: #fff;
-}
-
-/* 우측 아이콘 */
-header .icons {
-   display: flex;
-   align-items: center;
-}
-
-header .icons ul {
-   display: flex;
-   align-items: center;
-   gap: 40px;
-   /* 기존 60px → 이미지처럼 촘촘하게 */
-}
-
-header .icons ul li a {
-   display: flex;
-   align-items: center;
-   font-size: 1.35rem;
-   color: rgba(255, 255, 255, 0.92);
-   transition: opacity .2s ease;
-}
-
-header .icons ul li a:hover {
-   opacity: .75;
-}
-
-/* ================================
-   드롭다운(sub)도 검정 톤에 맞게(가독성)
-   필요 없으면 이 블록은 삭제해도 OK
-=================================== */
-header nav .gnb .sub {
-   /* 기존 top:100% 유지하되, 바 아래로 살짝 띄움 */
-   top: calc(100% + 14px);
-   left: -14px;
-
-   padding: 18px 18px;
-   min-width: 200px;
-
-   background: rgba(0, 0, 0, 0.4);
-   border-radius: 14px;
-   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.21);
-
-   /* 기존 코드의 display 제어는 그대로 사용 */
-}
-
-header nav .gnb .sub>li>a {
-   color: rgba(255, 255, 255, 0.92);
-}
-
-header nav .gnb .sub2 li a {
-   color: rgba(255, 255, 255, 0.70);
-}
-
-header nav .gnb .sub2 li a:hover {
-   color: #fff;
-}
-
-/* ================================
-   모바일 대응 (공통 미디어에 넣어도 됨)
-=================================== */
-@media (max-width: 768px) {
-   header {
-      top: 12px;
-   }
-
-   header .inner {
-      width: calc(100% - 24px);
-      /* 좌우 12px */
-      height: 56px;
-      padding: 0 16px;
-      border-radius: 14px;
-   }
-
-   header nav .gnb {
-      gap: 18px;
-   }
-
-   header .icons ul {
-      gap: 14px;
-   }
-}
-
-/* ================================
-   서브메뉴 "한 박스(공용 패널)"로 만들기
-   common.css 맨 아래에 추가
-=================================== */
-
-/* (1) 기존 gnb::before(배경용) 쓰던 거 끄기 */
-header nav .gnb::before {
-   display: none !important;
-}
-
-/* (2) 공용 드롭다운 패널(배경 1개) 만들기
-   - nav는 position을 주면 안 됨(그래야 ::after가 .inner 기준으로 잡힘)
-   - hover 유지용으로 pointer-events 켬
-*/
-header .inner {
-   /* 필요하면 수치만 조절 */
-   --mega-radius: 18px;
-   --mega-height: clamp(260px, 42vh, 460px);
-   --mega-pad-top: 22px;
-   /* 서브메뉴가 패널 안에서 시작되는 위 여백 */
-}
-
-/* 공용 박스 */
-header nav::after {
-   content: "";
-   position: absolute;
-
-   /* ✅ .inner(검정 바) 바로 아래에 붙여서 내려오게 */
+   top: var(--header-fixed-top);
    left: 0;
    right: 0;
+   z-index: 9999;
 
-   /* 바의 라운드 하단 모서리와 자연스럽게 이어지도록 살짝 겹치게 */
-   top: calc(100% - var(--mega-radius));
+   padding: var(--header-pad-y) 0;
+   --header-h: 72px;
+   --header-pad-y: 12px;
+   --header-fixed-top: 0px;
+   --panel-gap: 12px;
+   overflow: visible;
+}
 
-   height: var(--mega-height);
-   background: rgba(0, 0, 0, 0.4);
-   /* 한 박스 배경 */
-   border-radius: var(--mega-radius);
-   box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+header>.inner {
+   height: var(--header-h);
+   padding: 0 28px;
+
+   display: flex;
+   align-items: center;
+   gap: 24px;
+
+   background: rgba(0, 0, 0, .8);
+   backdrop-filter: blur(15px);
+   border-radius: 10px;
+   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+
+   overflow: visible;
+   position: relative;
+}
+
+header h1 {
+   flex: 0 0 auto;
+}
+
+header h1 a {
+   display: block;
+   font-weight: 800;
+   font-size: 24px;
+   letter-spacing: -0.02em;
+   color: #039669;
+}
+
+header .icons {
+   flex: 0 0 auto;
+}
+
+header .icons i {
+   font-size: 21px;
+}
+
+header .icons ul {
+   display: flex;
+   align-items: center;
+   gap: 20px;
+}
+
+header .icons a {
+   width: 40px;
+   height: 40px;
+   border-radius: 999px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+
+   color: #fff;
+   opacity: 0.9;
+}
+
+header .icons a:hover {
+   background: rgba(255, 255, 255, 0.08);
+   opacity: 1;
+}
+
+header nav {
+   flex: 1;
+   display: flex;
+   justify-content: center;
+}
+
+header .gnb {
+   display: flex;
+   align-items: center;
+   gap: 50px;
+}
+
+header .gnb>li>a {
+   height: var(--header-h);
+   display: flex;
+   align-items: center;
+
+   padding: 0 6px;
+   color: rgba(255, 255, 255, 0.78);
+   font-weight: 600;
+   letter-spacing: -0.01em;
+}
+
+header .gnb>li:hover>a,
+header .gnb>li:focus-within>a {
+   color: #fff;
+}
+
+header .gnb>li {
+   position: static;
+}
+
+header .gnb>li>ul.sub {
+   position: absolute;
+   box-sizing: border-box;
+   left: 0;
+   right: 0;
+   top: 100%;
+   width: 100%;
+
+   padding: calc(var(--panel-gap) + 26px) 32px 32px;
+
+   display: flex;
+   flex-wrap: wrap;
+   gap: 18px 52px;
 
    opacity: 0;
    visibility: hidden;
-   transform: translateY(-6px);
-   transition: opacity .18s ease, transform .18s ease, visibility .18s ease;
+   transform: translateY(-8px);
+   transition:
+      opacity 0.18s ease,
+      transform 0.18s ease,
+      visibility 0s linear 0.18s;
 
-   /* hover 끊기지 않게(패널 빈 공간에서도 hover 유지) */
    pointer-events: none;
-
-   /* 서브메뉴보다 뒤로 */
-   z-index: 1;
+   z-index: 50;
 }
 
-/* nav에 마우스 올리면 공용 박스 + 서브메뉴 같이 오픈 */
-header nav:hover::after {
+header .gnb>li>ul.sub::before {
+   content: "";
+   position: absolute;
+   left: 0;
+   right: 0;
+
+   top: var(--panel-gap);
+   bottom: 0;
+
+   background: rgba(0, 0, 0, .8);
+   border-radius: 10px;
+   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+   backdrop-filter: blur(15px);
+
+   z-index: -1;
+}
+
+header .gnb>li:hover>ul.sub,
+header .gnb>li:focus-within>ul.sub {
    opacity: 1;
    visibility: visible;
    transform: translateY(0);
+   transition-delay: 0s;
+
+
    pointer-events: auto;
 }
 
-/* (3) 각 submenu(.sub)의 "개별 박스" 제거 + 공용 박스 위에 컬럼처럼만 배치 */
-header nav .gnb>li {
-   position: relative;
-   /* 각 li 기준으로 sub가 내려오게 */
+header .gnb>li>ul.sub>li {
+   flex: 0 0 190px;
+   min-width: 190px;
 }
 
-header nav .gnb .sub {
-   /* 기존 개별 박스 느낌 없애기 */
-   background: transparent !important;
-   box-shadow: none !important;
-   border-radius: 0 !important;
-
-   /* 위치/여백: 공용 패널 안에서 시작 */
-   position: absolute;
-   top: calc(100% + var(--mega-pad-top));
-   left: 0;
-
-   padding: 0;
-   /* 패널이 공용이니까 sub 자체 패딩은 제거 */
-   min-width: 180px;
-   z-index: 2;
-   /* 공용 박스(nav::after)보다 위 */
-
-   /* 기본은 숨김 */
-   display: none;
-}
-
-/* ✅ “다같이 내려오게”: nav hover면 sub 전부 보이게 */
-header nav:hover .gnb .sub {
+header .gnb>li>ul.sub>li>a {
    display: block;
-}
-
-/* (4) 서브메뉴 텍스트 컬러(검정 배경 대비) */
-header nav .gnb .sub>li>a {
-   color: rgba(255, 255, 255, 0.92);
-}
-
-header nav .gnb .sub2 li a {
-   color: rgba(255, 255, 255, 0.70);
-}
-
-header nav .gnb .sub2 li a:hover {
+   padding: 6px 0;
    color: #fff;
+   font-weight: 700;
+   line-height: 1.25;
 }
 
-/* ==================================================
-   1) 헤더 바 ↔ 메가메뉴 박스 사이 "간격" 만들기
-   2) 메가메뉴 내부 세로 간격(일정한 위아래 간격) 정리
-   common.css 맨 아래에 추가
-================================================== */
+header .gnb>li>ul.sub ul.sub2 {
+   position: static;
+   margin-top: 10px;
 
-header .inner {
-   /* ✅ 여기 숫자만 바꾸면 됨 */
-   --mega-gap: 12px;
-   /* 헤더 바와 메가메뉴 박스 사이 간격 */
-   --mega-pad-top: 18px;
-   /* 박스 안에서 서브메뉴가 시작되는 상단 여백 */
-
-   --mega-group-gap: 18px;
-   /* 한 컬럼(.sub) 안에서 그룹(li) 간격 */
-   --mega-title-gap: 10px;
-   /* 그룹 타이틀(a) ↔ sub2 사이 간격 */
-   --mega-item-gap: 7px;
-   /* sub2 항목(li)끼리 간격 */
-}
-
-/* --- (A) gap 구간에서 hover가 끊기지 않도록 "투명 브릿지" 추가 --- */
-header nav::before {
-   content: "";
-   position: absolute;
-   left: 0;
-   right: 0;
-   top: 100%;
-   height: var(--mega-gap);
-   background: transparent;
-   opacity: 0;
-   visibility: hidden;
-   pointer-events: none;
-   z-index: 2;
-}
-
-header nav:hover::before {
-   opacity: 1;
-   visibility: visible;
-   pointer-events: auto;
-}
-
-/* --- (B) 공용 메가메뉴 박스 위치를 gap만큼 아래로 --- */
-/* 너 코드에 nav::after가 이미 있으면 아래 top만 덮어씌워짐 */
-header nav::after {
-   top: calc(100% + var(--mega-gap)) !important;
-}
-
-/* --- (C) 각 컬럼(.sub)도 gap + pad-top만큼 아래로 내려서 박스 안에서 시작하게 --- */
-header nav .gnb .sub {
-   top: calc(100% + var(--mega-gap) + var(--mega-pad-top)) !important;
-}
-
-
-/* ==================================================
-   메가메뉴 내부 세로 간격 "일정"하게 만들기
-   (기존 nth-child로 메뉴별 간격 다르게 준 것들 싹 무력화)
-================================================== */
-
-/* ✅ .sub가 ul이니까 flex-column + gap으로 그룹 간격 통일 */
-header nav:hover .gnb .sub {
-   display: flex !important;
-   /* block 대신 flex */
-}
-
-header nav .gnb .sub {
-   flex-direction: column;
-   gap: var(--mega-group-gap);
-   padding: 0 !important;
-   margin: 0 !important;
-   min-width: 180px;
-}
-
-/* 그룹(li) 자체 여백 통일 + 내부를 column으로 */
-header nav .gnb .sub>li {
-   margin: 0 !important;
-   padding: 0 !important;
    display: flex;
    flex-direction: column;
-   gap: var(--mega-title-gap);
+   gap: 8px;
 }
 
-/* 그룹 타이틀(예: 전체도서/시리즈/문학상...) */
-header nav .gnb .sub>li>a {
-   padding: 0 !important;
-   margin: 0 !important;
+header .gnb>li>ul.sub ul.sub2 a {
+   display: block;
+   padding: 2px 0;
+   color: rgba(255, 255, 255, 0.7);
+   font-size: 14px;
+   font-weight: 500;
    line-height: 1.35;
 }
 
-/* sub2 리스트도 flex-column + gap으로 항목 간격 통일 */
-header nav .gnb .sub2 {
-   padding: 0 !important;
-   margin: 0 !important;
-   padding-bottom: 0 !important;
-   /* 기존 15px 제거 */
-   display: flex;
-   flex-direction: column;
-   gap: var(--mega-item-gap);
+header .gnb>li>ul.sub ul.sub2 a:hover {
+   color: #fff;
 }
 
-header nav .gnb .sub2 li {
-   padding: 0 !important;
-   /* 기존 5px 0 제거 */
-   margin: 0 !important;
-}
-
-header nav .gnb .sub2 li a {
-   padding: 0 !important;
-   line-height: 1.55;
-   /* ✅ 줄간격 통일 */
+header .gnb>li>ul.sub>li>a:hover {
+   opacity: 0.9;
 }
 
 
+
+
+html,
+body {
+   overflow-x: hidden;
+}
+
+body {
+   padding-top: calc(var(--header-fixed-top) + (var(--header-pad-y) * 2) + var(--header-h));
+}
+
+html {
+   scroll-padding-top: calc(var(--header-fixed-top) + (var(--header-pad-y) * 2) + var(--header-h));
+}
 
 
 
