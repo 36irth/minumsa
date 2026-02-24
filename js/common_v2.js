@@ -13,6 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const update = () => {
     const y = window.scrollY;
 
+    // 메뉴 열려있으면 자동 숨김 로직 중지
+    if (header.classList.contains('is-menu-open')) {
+      header.classList.remove(HIDE_CLASS);
+      lastY = y;
+      ticking = false;
+      return;
+    }
+
     // 최상단이면 무조건 보이게
     if (y <= 0) {
       header.classList.remove(HIDE_CLASS);
@@ -50,69 +58,69 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 };
 
-  // 헤더 햄버거 메뉴(태블릿/모바일): 클릭 시 서브메뉴 패널 내려오기
-  const initHeaderMenu = () => {
-    const header = document.querySelector('header');
-    if (!header) return;
+// 헤더 햄버거 메뉴(태블릿/모바일): 클릭 시 서브메뉴 패널 내려오기
+const initHeaderMenu = () => {
+  const header = document.querySelector('header');
+  if (!header) return;
 
-    const nav = header.querySelector('nav');
-    const burger = header.querySelector('.icons ul li:nth-child(2) a'); // 2번째 아이콘을 햄버거로 사용
-    if (!nav || !burger) return;
+  const nav = header.querySelector('nav');
+  const burger = header.querySelector('.icons ul li:nth-child(2) a'); // 2번째 아이콘을 햄버거로 사용
+  if (!nav || !burger) return;
 
-    const mq = window.matchMedia('(max-width: 1024px)');
-    const isResponsive = () => mq.matches;
+  const mq = window.matchMedia('(max-width: 1024px)');
+  const isResponsive = () => mq.matches;
 
-    const openMenu = () => {
-      header.classList.add('is-menu-open');
-      header.classList.remove('is-hidden'); // 열릴 때 숨김 방지
-      burger.setAttribute('aria-expanded', 'true');
-    };
-
-    const closeMenu = () => {
-      header.classList.remove('is-menu-open');
-      burger.setAttribute('aria-expanded', 'false');
-    };
-
-    // 초기 aria
-    burger.setAttribute('aria-label', '메뉴');
-    burger.setAttribute('aria-expanded', 'false');
-
-    burger.addEventListener('click', (e) => {
-      // 데스크톱에서는 user 아이콘으로 남겨두고, 반응형에서만 메뉴 토글
-      e.preventDefault();
-      if (!isResponsive()) return;
-
-      if (header.classList.contains('is-menu-open')) closeMenu();
-      else openMenu();
-    });
-
-    // 바깥 클릭 시 닫기
-    document.addEventListener('click', (e) => {
-      if (!header.classList.contains('is-menu-open')) return;
-      const t = e.target;
-      if (burger.contains(t) || nav.contains(t)) return;
-      closeMenu();
-    });
-
-    // ESC로 닫기
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    // 리사이즈로 데스크톱 넘어가면 닫기
-    const onChange = () => {
-      if (!isResponsive()) closeMenu();
-    };
-    if (mq.addEventListener) mq.addEventListener('change', onChange);
-    else mq.addListener(onChange);
-
-    // 메뉴 내부 링크 클릭하면 닫기
-    nav.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (!a) return;
-      if (isResponsive()) closeMenu();
-    });
+  const openMenu = () => {
+    header.classList.add('is-menu-open');
+    header.classList.remove('is-hidden'); // 열릴 때 숨김 방지
+    burger.setAttribute('aria-expanded', 'true');
   };
+
+  const closeMenu = () => {
+    header.classList.remove('is-menu-open');
+    burger.setAttribute('aria-expanded', 'false');
+  };
+
+  // 초기 aria
+  burger.setAttribute('aria-label', '메뉴');
+  burger.setAttribute('aria-expanded', 'false');
+
+  burger.addEventListener('click', (e) => {
+    // 데스크톱에서는 user 아이콘으로 남겨두고, 반응형에서만 메뉴 토글
+    e.preventDefault();
+    if (!isResponsive()) return;
+
+    if (header.classList.contains('is-menu-open')) closeMenu();
+    else openMenu();
+  });
+
+  // 바깥 클릭 시 닫기
+  document.addEventListener('click', (e) => {
+    if (!header.classList.contains('is-menu-open')) return;
+    const t = e.target;
+    if (burger.contains(t) || nav.contains(t)) return;
+    closeMenu();
+  });
+
+  // ESC로 닫기
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMenu();
+  });
+
+  // 리사이즈로 데스크톱 넘어가면 닫기
+  const onChange = () => {
+    if (!isResponsive()) closeMenu();
+  };
+  if (mq.addEventListener) mq.addEventListener('change', onChange);
+  else mq.addListener(onChange);
+
+  // 메뉴 내부 링크 클릭하면 닫기
+  nav.addEventListener('click', (e) => {
+    const a = e.target.closest('a');
+    if (!a) return;
+    if (isResponsive()) closeMenu();
+  });
+};
 
   // 메인비주얼 swiper
   const initMainVisual = () => {
@@ -198,8 +206,8 @@ document.addEventListener('DOMContentLoaded', () => {
     track.appendChild(makeClones());
 
     // 속도/멈춤 시간
-    const speedPxPerSec = 230;
-    const pauseMs = 1600;
+    const speedPxPerSec = 70;
+    const pauseMs = 2000;
 
     let step = 0;
     let loopWidth = 0;
@@ -275,27 +283,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     function tick(now) {
-      const dt = now - lastTime;
+      const dt = Math.min(50, now - lastTime); // 탭/창 전환 시 dt 폭발 방지
       lastTime = now;
 
       if (!dragging && now >= pausedUntil && loopWidth > 0) {
         const prev = progress;
 
-        // 다음 정지점까지 남은 거리(px)
-        let distToStop =
-          (nextStop === 0) ? (loopWidth - progress) : (nextStop - progress);
-
-        // 정지점 근처에서 감속을 시작할 구간(카드 폭의 25% 정도)
-        const slowZone = step * 0.5;
-
-        // 0~1 비율(1=멀다=빠르게, 0=가깝다=느리게)
-        const t = Math.max(0, Math.min(1, distToStop / slowZone));
-
-        // 속도 하한(너무 0으로 떨어지면 안 멈추는 느낌 나서 최소 속도 보장)
-        const minSpeed = speedPxPerSec * 0.25;
-        const curSpeed = minSpeed + (speedPxPerSec - minSpeed) * t;
-
-        progress += (curSpeed * dt) / 1000;
+        progress += (speedPxPerSec * dt) / 1000;
 
         let wrapped = false;
         if (progress >= loopWidth) {
@@ -321,15 +315,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if (!prefersReducedMotion) requestAnimationFrame(tick);
-      // 🔥 탭 전환 복귀 시 타이밍 리셋
-      document.addEventListener('visibilitychange', () => {
-        if (document.visibilityState === 'visible') {
-          const now = performance.now();
-          lastTime = now;
-          pausedUntil = now + pauseMs;
+    }
+
+// 탭/창 전환 후 멈춤 리듬이 깨지는 문제 방지
+const resetTiming = () => {
+  const now = performance.now();
+  lastTime = now;
+
+  if (!document.hidden && !dragging) {
+    // 복귀 시 카드 위치 스냅 + 다음 정지점 재계산
+    if (step > 0) {
+      const snapped = Math.round(progress / step) * step;
+      progress = wrap(snapped);
+      applyTransform();
+
+      const currentIndex = Math.round(progress / step) % originalCount;
+      nextIndex = (currentIndex + 1) % originalCount;
+      nextStop = nextIndex * step;
+    }
+    pausedUntil = isHoveringCard ? Number.POSITIVE_INFINITY : now + pauseMs;
   }
-});
-    };
+};
+
+document.addEventListener('visibilitychange', resetTiming);
+window.addEventListener('blur', resetTiming);
+window.addEventListener('focus', resetTiming);
 
     // 카드 호버
     track.addEventListener('mouseover', (e) => {
@@ -758,6 +768,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   initHeaderAutoHide();
+  initHeaderMenu();
   initMainVisual();
   initAOS();
   initNewSection();

@@ -810,18 +810,19 @@ li.slide2 .txt_area {
    display: inline-flex;
    align-items: center;
    justify-content: center;
-   padding: 10px 18px;
+   padding: 10px 24px;
    border: 1px solid rgba(3,150,105,.8);
    box-shadow: 0 2px 10px rgba(0, 0, 0, .09);
    border-radius: 999px;
    background: #fff;
-   font-size: 1.25rem;
+   font-size: 1.37rem;
    color: #039669;
    text-decoration: none;
 }
 
 .pick_btn:hover {
-   background: rgba(255, 255, 255, .8);
+   background: rgba(3,150,105,.6);
+   color: #fff;
 }
 
 
