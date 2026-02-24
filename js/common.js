@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
   // 헤더: 아래로 스크롤하면 숨기고, 위로 스크롤하면 다시 보이기
-const initHeaderAutoHide = () => {
+  const initHeaderAutoHide = () => {
   const header = document.querySelector('header');
   if (!header) return;
 
@@ -134,8 +134,8 @@ const initHeaderAutoHide = () => {
     track.appendChild(makeClones());
 
     // 속도/멈춤 시간
-    const speedPxPerSec = 70;
-    const pauseMs = 2000;
+    const speedPxPerSec = 230;
+    const pauseMs = 1600;
 
     let step = 0;
     let loopWidth = 0;
@@ -217,7 +217,21 @@ const initHeaderAutoHide = () => {
       if (!dragging && now >= pausedUntil && loopWidth > 0) {
         const prev = progress;
 
-        progress += (speedPxPerSec * dt) / 1000;
+        // 다음 정지점까지 남은 거리(px)
+        let distToStop =
+          (nextStop === 0) ? (loopWidth - progress) : (nextStop - progress);
+
+        // 정지점 근처에서 감속을 시작할 구간(카드 폭의 25% 정도)
+        const slowZone = step * 0.5;
+
+        // 0~1 비율(1=멀다=빠르게, 0=가깝다=느리게)
+        const t = Math.max(0, Math.min(1, distToStop / slowZone));
+
+        // 속도 하한(너무 0으로 떨어지면 안 멈추는 느낌 나서 최소 속도 보장)
+        const minSpeed = speedPxPerSec * 0.25;
+        const curSpeed = minSpeed + (speedPxPerSec - minSpeed) * t;
+
+        progress += (curSpeed * dt) / 1000;
 
         let wrapped = false;
         if (progress >= loopWidth) {
@@ -243,7 +257,15 @@ const initHeaderAutoHide = () => {
       }
 
       if (!prefersReducedMotion) requestAnimationFrame(tick);
-    }
+      // 🔥 탭 전환 복귀 시 타이밍 리셋
+      document.addEventListener('visibilitychange', () => {
+        if (document.visibilityState === 'visible') {
+          const now = performance.now();
+          lastTime = now;
+          pausedUntil = now + pauseMs;
+  }
+});
+    };
 
     // 카드 호버
     track.addEventListener('mouseover', (e) => {

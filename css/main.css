@@ -444,7 +444,7 @@ li.slide2 .txt_area {
 .best_row {
    display: flex;
    align-items: flex-start;
-   gap: 3rem;
+   gap: 3.2rem;
    align-items: stretch;
 }
 
@@ -455,7 +455,7 @@ li.slide2 .txt_area {
    background: #fff;
    border: 1px solid #222;
    box-shadow: 0 6px 18px rgba(0, 0, 0, .09);
-   transition: opacity 200ms ease;
+   transition: opacity 350ms ease;
 }
 
 .best_feature.is-changing {
@@ -541,6 +541,8 @@ li.slide2 .txt_area {
    min-width: 0;
    display: flex;
    flex-direction: column;
+   --best-arrow: 40px; /* .best_prev/.best_next width */
+   --best-gap: 14px;   /* .best_side_top gap */
 }
 
 .best_side_top {
@@ -560,22 +562,30 @@ li.slide2 .txt_area {
    justify-content: center;
    cursor: pointer;
    flex: 0 0 auto;
-   transform: translateY(-48px);
+   transform: translateY(-58px);
 }
 
 .best_prev i,
 .best_next i {
-   font-size: 30px;
+   font-size: 35px;
    color: #222;
 }
 
 .best_viewport {
-   touch-action: pan-y;
-   flex: 1;
-   min-width: 0;
-   overflow: hidden;
-   cursor: grab;
+  touch-action: pan-x pan-y;
+
+  flex: 1;
+  min-width: 0;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  cursor: grab;
+  -webkit-overflow-scrolling: touch;
 }
+
+.best_viewport::-webkit-scrollbar { display: none; }
+.best_viewport { scrollbar-width: none; } /* Firefox */
 
 .best_viewport.is-dragging {
    cursor: grabbing;
@@ -670,10 +680,11 @@ li.slide2 .txt_area {
 .best_line {
    position: relative;
    margin-top: 28px;
-   width: 100%;
    height: 1px;
    background: rgba(0, 0, 0, 0.15);
    margin-top: auto;
+   width: calc(100% - (var(--best-arrow) * 2 + var(--best-gap) * 2));
+   margin-left: calc(var(--best-arrow) + var(--best-gap));
 }
 
 .best_line_fill {
@@ -688,6 +699,11 @@ li.slide2 .txt_area {
    transition: transform 300ms ease;
 }
 
+.best_card_link,
+.best_card_link * {
+  -webkit-user-drag: none;
+}
+
 
 
 /* intro */
@@ -695,7 +711,7 @@ li.slide2 .txt_area {
    background-image: url(../img/intro_bg.jpg);
    width: 100vw;
    margin-left: calc(50% - 50vw);
-   padding: 110px 0 95px;
+   padding: 110px 0;
 }
 
 .intro.pick .pick_inner {
@@ -825,6 +841,7 @@ li.slide2 .txt_area {
    width: 100%;
    height: 100%;
    object-fit: cover;
+   border-block-start: 1px solid #222;
 }
 
 
@@ -1042,7 +1059,7 @@ li.slide2 .txt_area {
 }
 
 .channel_frame {
-   width: 1440px;
+   width: 100%;
    max-width: 100%;
    box-sizing: border-box;
 
