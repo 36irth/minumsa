@@ -12,11 +12,7 @@
   - Mobile: 767px 이하
 */
 
-/* ------------------------------
-   Tablet
---------------------------------*/
 @media (max-width: 1024px){
-  /* 공통 컨테이너 폭 */
   .inner{
     width: 100%;
     padding: 0 60px;
@@ -27,7 +23,7 @@
     padding: 0;
   }
 
-  /* ---------- Header (Tablet) ---------- */
+
   header>.inner{
     padding: 0 18px;
     gap: 14px;
@@ -35,7 +31,6 @@
     position: fixed;
   }
 
-  /* nav는 햄버거로만 열리게 (기본 숨김) */
   header nav{
     position: absolute;
     top: calc(100% + 12px);
@@ -51,14 +46,13 @@
     backdrop-filter: blur(16px);
     box-shadow: 0 10px 28px rgba(0,0,0,.25);
 
-    max-height: 60vh; /* 화면 전부 가리지 않게 */
+    max-height: 60vh;
     overflow: auto;
     z-index: 9999;
   }
 
   header.is-menu-open nav{ display: block; }
 
-  /* 데스크톱 hover 드롭다운 무력화 + 패널 안에서 항상 보이게 */
   header .gnb{ 
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -68,7 +62,6 @@
 
   header .gnb>li{ position: static; }
 
-  /* 메인메뉴(굵게) */
   header .gnb>li>a{
     height: auto;
     padding: 6px 0 10px;
@@ -77,7 +70,6 @@
     letter-spacing: -0.01em;
   }
 
-  /* 1depth sub를 패널 안에서 펼친 상태로 */
   header .gnb>li>ul.sub{
     position: static;
     left: auto; right: auto; top: auto;
@@ -102,7 +94,6 @@
     min-width: 0;
   }
 
-  /* 서브메뉴(메인보다 얇게) */
   header .gnb>li>ul.sub>li>a{
     padding: 2px 0;
     font-weight: 650;
@@ -121,20 +112,16 @@
     color: rgba(255,255,255,.68);
   }
 
-  /* 헤더 메뉴(gnb)는 기본 숨기고 햄버거로만 접근 */
   header nav{ flex: 0 0 auto; }
 
-  /* 아이콘 위치: 오른쪽(검색 + 햄버거) */
   header .icons{ margin-left: auto; }
 
-  /* user 아이콘을 햄버거로 치환 (HTML 수정 없이) */
   header .icons ul{ gap: 10px; }
 
   header .icons ul li:nth-child(2) a{
     position: relative;
   }
 
-  /* user 아이콘 숨기고 햄버거 3줄 표시 */
   header .icons ul li:nth-child(2) a i{ display:none; }
   header .icons ul li:nth-child(2) a::before{
     content:"";
@@ -149,11 +136,10 @@
     border-radius: 2px;
   }
 
-  /* ---------- Main Visual (Tablet) ---------- */
   .search_bar{ display:none; }
 
   .main_visual{
-    height: 560px; /* 780 비율 축소 */
+    height: 560px;
   }
   .main_visual .swiper li{
     height: 500px;
@@ -173,7 +159,6 @@
     bottom: 18%;
   }
 
-  /* ---------- New (Tablet) ---------- */
   .new{
     --card-w: 180px;
     --card-h: 398px;
@@ -212,11 +197,11 @@
     /* padding: 7px 17px; */
   }
 
-  /* ---------- Best (Tablet) ---------- */
+ 
   .best{ padding: 0 0 130px; }
   .best_row{ gap: 24px; }
 
-  /* 좌(대표) : 우(리스트) 비율로 자연스럽게 줄어들게 */
+
   .best_feature{
     flex: 0 0 50%;
     width: auto;
@@ -246,10 +231,9 @@
     font-size: .65rem;
   }
 
-  /* 화살표 위치(너무 위로 떠 있으면 줄임) */
   .best_prev, .best_next{ transform: translateY(-36px); }
 
-  /* ---------- Intro (Tablet) ---------- */
+
   .intro.pick{
     padding: 90px 0;
     background-size: cover;
@@ -263,7 +247,6 @@
   .intro.pick .pick_top{ gap: 36px; }
   .pick_books{ gap: 14px; }
 
-  /* 책 표지 비율 유지하며 축소 */
   .pick_books .pick_book:first-child{
     height: 230px;
     width: auto;
@@ -281,7 +264,6 @@
     aspect-ratio: 271 / 390;
   }
 
-  /* ---------- Banner + Event (Tablet) ---------- */
   .banner{ padding-block: 110px 90px; }
   .ban_one, .ban_lit{
     height: auto;
@@ -297,7 +279,7 @@
   .event{ padding-inline: 0; }
   .event_banner img{ object-fit: cover; }
 
-  /* ---------- Channel (Tablet) ---------- */
+
   .channel{ padding-block: 90px; }
 
   .channel .channel_inner{
@@ -306,7 +288,6 @@
     box-sizing: border-box;
   }
 
-  /* 고정 px → 유동 그리드 */
   .channel_frame{
     grid-template-columns: repeat(3, minmax(0, 1fr)) 90px;
     grid-template-rows: auto auto;
@@ -314,7 +295,7 @@
 
   .channel_video{
     height: auto;
-    aspect-ratio: 450 / 316; /* 비율 유지 */
+    aspect-ratio: 450 / 316;
     grid-template-rows: 1fr auto;
   }
 
@@ -334,7 +315,7 @@
 
   .channel_social_item{
     width: 90px;
-    height: auto; /* 1fr로 맞춤 */
+    height: auto;
   }
 
   .channel_social_item i {
@@ -350,7 +331,6 @@
     padding: 10px 12px;
   }
 
-  /* ---------- Board (Tablet) ---------- */
   .board{ padding-block: 50px 130px; }
 
   .board .board_row{
@@ -358,7 +338,6 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  /* 민음사소식(3번째)은 2열 전체로 내려서 확보 */
   .board .board_row > .board_news{
     grid-column: 1 / -1;
   }
@@ -372,7 +351,7 @@
     font-size: .78rem;
   }
 
-  /* ---------- Footer (Tablet) ---------- */
+
   footer{ padding-block: 40px; }
   footer .inner{ gap: 30px; }
 
@@ -384,415 +363,4 @@
     flex-wrap: wrap; */
     display: none;
   }
-}
-
-
-/* ------------------------------
-   Mobile
---------------------------------*/
-@media (max-width: 767px){
-  /* 공통 컨테이너 */
-  .inner{
-    width: 100%;
-    padding: 0 24px;
-    box-sizing: border-box;
-  }
-
-  /* ---------- Header (Mobile) ---------- */
-  header>.inner{
-    padding: 0 14px;
-    gap: 10px;
-  }
-
-  header h1 a{ font-size: 20px; }
-
-  /* 아이콘: 검색 + 햄버거(오른쪽) */
-  header .icons{ margin-left:auto; }
-  header .icons ul{ gap: 8px; }
-
-  /* nav → 오프캔버스(오른쪽→왼쪽) */
-  header nav{
-    display: block; /* fixed로 띄우기 때문에 기본 display 허용 */
-    position: fixed;
-    top: 0;
-    right: 0;
-    height: 100vh;
-    width: min(340px, 86vw);
-
-    padding: 92px 18px 22px;
-    box-sizing: border-box;
-
-    background: rgba(0,0,0,.92);
-    backdrop-filter: blur(16px);
-
-    /* ✅ 기본은 완전히 숨김(패널이 계속 떠있던 문제 방지) */
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-
-    transform: translateX(110%);
-    transition:
-      transform .32s cubic-bezier(0.22, 0.61, 0.36, 1),
-      opacity .18s ease,
-      visibility 0s linear .32s;
-    z-index: 9999;
-
-    overflow: auto;
-  }
-
-  /* 배경 오버레이 */
-  header.is-menu-open::before{
-    content:"";
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,.35);
-    z-index: 9998;
-  }
-
-  header.is-menu-open nav{
-    transform: translateX(0);
-    opacity: 1;
-    visibility: visible;
-    pointer-events: auto;
-    transition:
-      transform .32s cubic-bezier(0.22, 0.61, 0.36, 1),
-      opacity .18s ease,
-      visibility 0s;
-  }
-
-  /* 모바일 메뉴: 메인메뉴 목록 */
-  header .gnb{
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  header .gnb>li>a{
-    height: auto;
-    padding: 12px 4px;
-    color: #fff;
-    font-weight: 800; /* 메인메뉴 굵게 */
-  }
-
-  /* 서브메뉴: 아코디언(기본 닫힘) */
-  header .gnb>li>ul.sub{
-    position: static;
-    padding: 0;
-    margin: 0;
-
-    display: block;
-    opacity: 1;
-    visibility: visible;
-    transform: none;
-
-    max-height: 0;
-    overflow: hidden;
-    pointer-events: auto;
-
-    transition: max-height .28s ease;
-  }
-  header .gnb>li>ul.sub::before{ display:none; }
-
-  /* ✅ JS로 li에 .is-open 붙이면 열림 (권장)
-     - :focus-within 기반 자동 오픈은 모바일에서 '안 눌러도 계속 떠있음'처럼 느껴질 수 있어 제거 */
-  header .gnb>li.is-open>ul.sub{
-    max-height: 60vh;
-  }
-
-  header .gnb>li>ul.sub>li{
-    padding: 6px 0;
-  }
-
-  header .gnb>li>ul.sub>li>a{
-    padding: 6px 4px;
-    font-weight: 650; /* 서브메뉴는 조금 얇게 */
-    font-size: 14px;
-    color: rgba(255,255,255,.9);
-  }
-
-  header .gnb>li>ul.sub ul.sub2{
-    margin-top: 6px;
-    padding-left: 10px;
-  }
-
-  header .gnb>li>ul.sub ul.sub2 a{
-    font-size: 13px;
-    font-weight: 450;
-    color: rgba(255,255,255,.7);
-  }
-
-  /* 데스크톱 hover 오픈 효과 제거 */
-  header .gnb>li:hover>ul.sub,
-  header .gnb>li:focus-within>ul.sub{
-    /* 모바일에서는 JS(.is-open) + max-height로 제어 */
-  }
-
-  /* ---------- Main Visual (Mobile) ---------- */
-  .search_bar{ display:none; }
-
-  .main_visual{ height: 460px; }
-  .main_visual .swiper li{ height: 420px; }
-
-
-
-  .main_visual .swiper li .txt_area{
-    position: absolute;
-    left: 16px;
-    right: 16px;
-  }
-
-  .sub_txt{ font-size: 1.0rem; }
-  .txt_area .tit{ font-size: 2.0rem; margin-block: 14px 20px; }
-  .txt_area .tit span{ font-size: 16px; }
-  .txt_area .txt{ font-size: 1.0rem; }
-
-  /* ---------- New (Mobile) ---------- */
-  .new{
-    --card-w: 150px;          /* 2~3개 보이게 */
-    --card-h: 350px;
-    --photo-h: 220px;
-    --text-h: 130px;
-    --gap: 18px;
-
-    padding: 55px 0 80px;
-  }
-
-  .section_head{
-    padding-bottom: 2.2rem;
-  }
-
-  .secTitle{ font-size: 2.0rem; }
-
-  /* ---------- Best (Mobile) ---------- */
-  .best{ padding: 0 0 90px; }
-
-  .best_row{
-    flex-direction: column;
-    gap: 22px;
-  }
-
-  .best_feature{
-    width: 100%;
-    flex: 0 0 auto;
-    height: auto;
-  }
-
-  /* 대표카드 내부도 조금 컴팩트 */
-  .best_feature_photo{
-    width: 42%;
-    min-height: 240px;
-  }
-  .best_feature_body{ padding: 14px 14px 14px; }
-  .best_rank{ font-size: 1.35rem; }
-  .best_title{ font-size: 1.25rem; }
-  .best_author{ font-size: 1.05rem; }
-  .best_copy{ font-size: .95rem; }
-
-  /* 작은 카드 리스트: 대표 카드 밑으로, 2개씩 보이게 */
-  .best_side{ width: 100%; }
-  .best_side_top{ gap: 10px; }
-
-  .best_prev,
-  .best_next{
-    width: 40px;
-    height: 40px;
-    transform: none;
-  }
-
-  /* 클릭(활성) 느낌 */
-  .best_prev:active,
-  .best_next:active{
-    transform: scale(.96);
-  }
-
-  .best_list{ gap: 12px; }
-
-  .best_card{
-    width: calc((100% - 12px) / 2);
-    height: 270px;
-  }
-
-  .best_card_photo{ height: 175px; }
-
-  /* 진행바(스크롤바)도 리스트 폭 기준으로 */
-  .best_line{
-    margin-top: 18px;
-    width: 100%;
-    margin-left: 0;
-  }
-
-  /* ---------- Intro (Mobile) ---------- */
-  .intro.pick{ padding: 70px 0; }
-
-  /* 사진 3장 세로 */
-  .pick_books{
-    flex-direction: column;
-    gap: 14px;
-    width: 100%;
-  }
-
-  .pick_books .pick_book:first-child,
-  .pick_books .pick_book:nth-child(2),
-  .pick_books .pick_book:nth-child(3){
-    width: 100%;
-    height: auto;
-    aspect-ratio: 3 / 4;
-  }
-
-  /* 사진 밑에 타이틀 2개 좌우 배치 */
-  .intro.pick .pick_top{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-areas:
-      "books books"
-      "title copy";
-    gap: 18px;
-    align-items: start;
-  }
-
-  .pick_books{ grid-area: books; }
-  .pick_title{ grid-area: title; text-align: left; font-size: 1.7rem; }
-  .pick_copy{ grid-area: copy; text-align: right; font-size: 1.7rem; }
-
-  .pick_desc{ font-size: 1.05rem; }
-  .pick_btn{ font-size: 1.0rem; margin-top: 34px; }
-
-  /* ---------- Banner (Mobile) ---------- */
-  .banner{
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    padding-block: 40px 40px;
-    flex-direction: column;
-  }
-
-  .ban_one,
-  .ban_lit{
-    width: 100%;
-    height: auto;
-    aspect-ratio: 740 / 453;
-    background-size: cover;
-    background-position: center;
-  }
-
-  .ban_lit{ margin-left: 0; }
-
-  /* ---------- Event (Mobile) ---------- */
-  .event{ padding: 0; }
-  .event_banner{ height: auto; }
-
-  /* ---------- Channel (Mobile) ---------- */
-  .channel{ padding-block: 70px; }
-
-  .channel .channel_inner{
-    max-width: none;
-    padding: 0 16px;
-    box-sizing: border-box;
-  }
-
-  .channel_frame{
-    grid-template-columns: 1fr;
-    grid-template-rows: auto;
-  }
-
-  /* 영상 3개 세로 */
-  .channel_video{
-    grid-column: 1;
-    height: auto;
-    aspect-ratio: 450 / 316;
-    border-right: 0;
-    border-bottom: 1px solid #222;
-  }
-
-  .channel_video:last-of-type{
-    border-bottom: 0;
-  }
-
-  .channel_caption{
-    min-height: 56px;
-    padding: 10px 12px;
-    line-height: 1.25;
-    font-size: 1.05rem;
-  }
-
-  /* 아이콘 4개 가로 1줄 (영상 가로값에 딱 맞게) */
-  .channel_social{
-    grid-column: 1;
-    grid-row: auto;
-
-    width: 100%;
-    height: auto;
-
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: 1fr;
-
-    border-top: 1px solid #222;
-    border-left: 0;
-  }
-
-  .channel_social_item{
-    width: auto;
-    height: 68px;
-    border-right: 1px solid #222;
-    border-bottom: 0;
-  }
-  .channel_social_item:last-child{ border-right: 0; }
-
-  /* 하단 바로가기 세로 */
-  .channel_nav{
-    grid-column: 1;
-    grid-row: auto;
-
-    grid-template-columns: 1fr;
-    height: auto;
-  }
-
-  .channel_nav_item{
-    height: 63px;
-    border-right: 0;
-    border-bottom: 1px solid #222;
-  }
-
-  .channel_nav_item:last-child{ border-bottom: 0; }
-
-  /* ---------- Board (Mobile) ---------- */
-  .board{ padding-block: 40px 90px; }
-
-  .board .board_row{
-    display: flex;
-    flex-direction: column;
-    gap: 28px;
-  }
-
-  /* 민음사소식/공지사항/자료실: 아래 3줄 */
-  .board_col.board_news{
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-  }
-
-  .board_news_block{ margin-top: 0; }
-
-  /* ---------- Footer (Mobile) ---------- */
-  footer{ padding-block: 34px; }
-  footer .inner{ flex-direction: column; gap: 18px; }
-
-  /* .right 삭제(숨김) */
-  footer .right{ display: none; }
-
-  footer .left{ flex-direction: column; gap: 18px; }
-  footer h2{ font-size: 1.9rem; }
-
-  footer .info ul{
-    flex-direction: column;
-    gap: 6px;
-    padding-bottom: 18px;
-  }
-
-  footer .info ul li{
-    padding: 0;
-    border-right: 0;
-  }
-
-  footer p.contact span{ display: inline-block; padding-right: 10px; }
 }

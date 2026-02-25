@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!header) return;
 
   const HIDE_CLASS = 'is-hidden';
-  const DELTA = 20; // 이 픽셀 이상 움직일 때만 반응(잔떨림 방지)
+  const DELTA = 20;
 
   let lastY = window.scrollY;
   let ticking = false;
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const update = () => {
     const y = window.scrollY;
 
-    // 최상단이면 무조건 보이게
+    
     if (y <= 0) {
       header.classList.remove(HIDE_CLASS);
       lastY = y;
@@ -23,14 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const diff = y - lastY;
 
-    // 너무 작은 움직임은 무시
+    
     if (Math.abs(diff) < DELTA) {
       ticking = false;
       return;
     }
 
-    // diff > 0 : 아래로 스크롤 -> 숨김
-    // diff < 0 : 위로 스크롤 -> 표시
     if (diff > 0) header.classList.add(HIDE_CLASS);
     else header.classList.remove(HIDE_CLASS);
 
@@ -49,70 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
     { passive: true }
   );
 };
-
-  // 헤더 햄버거 메뉴(태블릿/모바일): 클릭 시 서브메뉴 패널 내려오기
-  const initHeaderMenu = () => {
-    const header = document.querySelector('header');
-    if (!header) return;
-
-    const nav = header.querySelector('nav');
-    const burger = header.querySelector('.icons ul li:nth-child(2) a'); // 2번째 아이콘을 햄버거로 사용
-    if (!nav || !burger) return;
-
-    const mq = window.matchMedia('(max-width: 1024px)');
-    const isResponsive = () => mq.matches;
-
-    const openMenu = () => {
-      header.classList.add('is-menu-open');
-      header.classList.remove('is-hidden'); // 열릴 때 숨김 방지
-      burger.setAttribute('aria-expanded', 'true');
-    };
-
-    const closeMenu = () => {
-      header.classList.remove('is-menu-open');
-      burger.setAttribute('aria-expanded', 'false');
-    };
-
-    // 초기 aria
-    burger.setAttribute('aria-label', '메뉴');
-    burger.setAttribute('aria-expanded', 'false');
-
-    burger.addEventListener('click', (e) => {
-      // 데스크톱에서는 user 아이콘으로 남겨두고, 반응형에서만 메뉴 토글
-      e.preventDefault();
-      if (!isResponsive()) return;
-
-      if (header.classList.contains('is-menu-open')) closeMenu();
-      else openMenu();
-    });
-
-    // 바깥 클릭 시 닫기
-    document.addEventListener('click', (e) => {
-      if (!header.classList.contains('is-menu-open')) return;
-      const t = e.target;
-      if (burger.contains(t) || nav.contains(t)) return;
-      closeMenu();
-    });
-
-    // ESC로 닫기
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') closeMenu();
-    });
-
-    // 리사이즈로 데스크톱 넘어가면 닫기
-    const onChange = () => {
-      if (!isResponsive()) closeMenu();
-    };
-    if (mq.addEventListener) mq.addEventListener('change', onChange);
-    else mq.addListener(onChange);
-
-    // 메뉴 내부 링크 클릭하면 닫기
-    nav.addEventListener('click', (e) => {
-      const a = e.target.closest('a');
-      if (!a) return;
-      if (isResponsive()) closeMenu();
-    });
-  };
 
   // 메인비주얼 swiper
   const initMainVisual = () => {

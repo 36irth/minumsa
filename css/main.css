@@ -1026,16 +1026,6 @@ li.slide2 .txt_area {
    font-size: 1.7rem;
 }
 
-/* @media (max-width: 900px) {
-   .board_row {
-      flex-direction: column;
-      gap: 36px;
-   }
-
-   .board_col.board_news {
-      flex: 1;
-   }
-} */
 
 
 
@@ -1215,9 +1205,3 @@ li.slide2 .txt_area {
    background: #0f7a4f;
    color: #fff;
 }
-
-/* @media (max-width: 1500px) {
-   .channel_frame {
-      overflow-x: auto;
-   }
-} */
