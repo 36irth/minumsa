@@ -359,8 +359,6 @@
   footer h2{ font-size: 2.5rem; }
 
   footer .right{
-    /* gap: 22px;
-    flex-wrap: wrap; */
     display: none;
   }
 }
