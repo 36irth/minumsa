@@ -48,6 +48,68 @@ document.addEventListener('DOMContentLoaded', () => {
   );
 };
 
+  // 투명 헤더: 현재 배경과 활성 메인 슬라이드에 맞춰 전경색 전환
+  const initHeaderContrast = () => {
+    const header = document.querySelector('header');
+    if (!header) return;
+
+    let ticking = false;
+
+    const colorIsDark = (value) => {
+      const match = value?.match(/rgba?\((\d+)[, ]+(\d+)[, ]+(\d+)(?:[, /]+([\d.]+))?\)/i);
+      if (!match || (match[4] !== undefined && Number(match[4]) < 0.1)) return null;
+      const [r, g, b] = match.slice(1, 4).map(Number);
+      const luminance = (0.2126 * r + 0.7152 * g + 0.0722 * b) / 255;
+      return luminance < 0.48;
+    };
+
+    const backgroundIsDark = (target) => {
+      const visual = target?.closest('.main_visual');
+      if (visual) {
+        const activeSlide = visual.querySelector('.swiper-slide-active') || visual.querySelector('.swiper-slide');
+        return Boolean(activeSlide?.classList.contains('slide1'));
+      }
+
+      if (target?.closest('.event')) return true;
+
+      let current = target;
+      while (current && current !== document.documentElement) {
+        const result = colorIsDark(getComputedStyle(current).backgroundColor);
+        if (result !== null) return result;
+        current = current.parentElement;
+      }
+      return false;
+    };
+
+    const update = () => {
+      const sampleY = Math.min(window.innerHeight - 1, Math.max(1, header.offsetHeight + 1));
+      const layers = document.elementsFromPoint(window.innerWidth / 2, sampleY);
+      const target = layers.find((element) => !header.contains(element));
+      header.classList.toggle('is-on-dark', backgroundIsDark(target));
+      ticking = false;
+    };
+
+    const schedule = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(update);
+    };
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+
+    const visual = document.querySelector('.main_visual');
+    if (visual) {
+      new MutationObserver(schedule).observe(visual, {
+        subtree: true,
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+    }
+
+    schedule();
+  };
+
   // 메인비주얼 swiper
   const initMainVisual = () => {
     const mainSwiperEl = document.querySelector('.main_visual .swiper');

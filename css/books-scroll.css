@@ -1,0 +1,131 @@
+@charset "utf-8";
+
+/* Independent scroll axes for the YouTube section. */
+.books-page .bk-youtube-grid {
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.books-page .bk-youtube { overflow: hidden; }
+
+.books-page .bk-youtube-books {
+  min-width: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+
+.books-page .bk-youtube-list {
+  width: calc(100% + 45px);
+  height: calc(100% - 113px);
+  margin-top: -45px;
+  margin-left: -45px;
+  padding-top: 45px;
+  padding-left: 45px;
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+.books-page .bk-youtube-list article { position: relative; }
+
+.books-page .bk-videos {
+  display: flex;
+  flex-wrap: nowrap;
+  min-width: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  align-items: flex-start;
+}
+
+.books-page .bk-videos article {
+  flex: 0 0 350px;
+  min-width: 350px;
+}
+
+.books-page .bk-videos article a { background: #3d3d3d; }
+.books-page .bk-videos article a > img,
+.books-page .bk-videos article a > .bx { display: none; }
+
+.books-page .bk-face {
+  position: absolute;
+  z-index: 3;
+  left: -45px;
+  top: -45px;
+  width: 90px;
+  height: 90px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,.35);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.books-page .bk-face img { width: 100%; height: 100%; object-fit: cover; }
+
+.books-page .bk-scroll-control {
+  position: absolute;
+  z-index: 8;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  color: #fff;
+  background: rgba(43,43,43,.88);
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 50%;
+  box-shadow: 0 4px 14px rgba(0,0,0,.16);
+  cursor: pointer;
+  transition: background .2s ease, transform .2s ease, opacity .2s ease;
+}
+
+.books-page .bk-scroll-control:hover { background: #2b2b2b; transform: scale(1.06); }
+.books-page .bk-scroll-control:focus-visible { outline: 3px solid #039669; outline-offset: 3px; }
+.books-page .bk-scroll-control i { font-size: 30px; transition: transform .25s ease; }
+.books-page .bk-scroll-control.is-return i { transform: rotate(180deg); }
+.books-page .bk-scroll-control.is-disabled { opacity: 0; pointer-events: none; }
+.books-page .bk-scroll-vertical { left: calc(50% - 72px); bottom: 22px; }
+.books-page .bk-scroll-horizontal { right: -216px; bottom: 22px; }
+
+@media (min-width: 1025px) {
+  .books-page .bk-youtube-grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    height: 900px;
+    overflow: visible;
+  }
+
+  .books-page .bk-youtube-books,
+  .books-page .bk-videos { height: 900px; }
+
+  .books-page .bk-videos {
+    width: calc(100% + 240px);
+    max-width: none;
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 1024px) {
+  .books-page .bk-youtube-grid { overflow: visible; }
+  .books-page .bk-youtube-books { height: 620px; max-height: 620px; }
+  .books-page .bk-youtube-list { height: calc(100% - 85px); }
+  .books-page .bk-videos { padding-bottom: 12px; }
+  .books-page .bk-videos article {
+    flex-basis: 270px;
+    min-width: 270px;
+  }
+  .books-page .bk-scroll-vertical { left: auto; right: 16px; top: 556px; bottom: auto; }
+  .books-page .bk-scroll-horizontal { right: 16px; bottom: 16px; }
+}
+
+@media (max-width: 767px) {
+  .books-page .bk-youtube-books { height: 520px; max-height: 520px; }
+  .books-page .bk-youtube-list { width: calc(100% + 22px); height: calc(100% - 84px); margin-top: -28px; margin-left: -22px; padding-top: 28px; padding-left: 22px; }
+  .books-page .bk-face { left: -22px; top: -28px; width: 64px; height: 64px; }
+  .books-page .bk-videos article {
+    flex-basis: min(78vw, 300px);
+    min-width: min(78vw, 300px);
+  }
+  .books-page .bk-scroll-vertical { top: 456px; }
+}

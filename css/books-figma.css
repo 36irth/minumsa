@@ -1,0 +1,154 @@
+@charset "utf-8";
+
+/* Typography and colors from Figma frame 849:54. Main visual intentionally excluded. */
+.books-page .bk-new,
+.books-page .bk-best { color: #2b2b2b; background: #fff; }
+.books-page .bk-pick,
+.books-page .bk-youtube { color: #2b2b2b; background: #bebebe; }
+
+.books-page .bk-new *,
+.books-page .bk-best *,
+.books-page .bk-pick *,
+.books-page .bk-youtube *,
+.books-page .wrap > footer * { box-sizing: border-box; }
+
+.books-page .bk-heading > div:first-child > span,
+.books-page .bk-simple-heading > span {
+  margin: 0 0 15px;
+  color: #797979;
+  font-family: 'BookkGothic', sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: -.24px;
+}
+
+.books-page .bk-heading h2,
+.books-page .bk-simple-heading h2,
+.books-page .bk-pick h2 {
+  margin: 0;
+  color: #2b2b2b;
+  font-family: 'BookkMyungjo', serif;
+  font-size: 50px;
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -.5px;
+}
+
+.books-page .bk-tabs button {
+  color: #797979;
+  font-family: 'SUIT', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: -.16px;
+}
+.books-page .bk-tabs button.is-active { color: #039669; font-weight: 800; }
+.books-page .bk-heading-bottom > a {
+  padding: 2px 7px;
+  color: #797979;
+  font: 600 18px/1.5 'SUIT', sans-serif;
+}
+
+.books-page .bk-pick-copy {
+  color: #2b2b2b;
+  font-family: 'SUIT', sans-serif;
+  font-size: 36px;
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -.36px;
+  text-align: center;
+}
+.books-page .bk-pick-copy b { font-size: inherit; font-weight: 700; }
+
+@media (min-width: 1281px) {
+  .books-page .bk-container { width: 1440px; }
+
+  /* New */
+  .books-page .bk-new { padding: 170px 0 100px; }
+  .books-page .bk-heading { gap: 70px; margin-bottom: 30px; }
+  .books-page .bk-heading > div:first-child { min-height: 161px; }
+  .books-page .bk-heading-bottom { align-items: flex-end; }
+  .books-page .bk-tabs button { padding: 0 20px; }
+  .books-page .bk-tabs button:first-child { padding-left: 0; }
+  .books-page .bk-new-row { grid-template-columns: 280px minmax(0, 1fr); gap: 70px; height: 604px; }
+  .books-page .bk-new-lead { width: 280px; box-shadow: 0 4px 21.7px 3px rgba(0,0,0,.15); }
+  .books-page .bk-book-viewport { height: 604px; padding-bottom: 0; }
+  .books-page .bk-book-list { width: 100%; min-width: 0; height: 604px; gap: 0; justify-content: space-between; }
+  .books-page .bk-book-card { flex: 0 0 240px; height: 604px; display: flex; flex-direction: column; justify-content: center; }
+  .books-page .bk-book-card > img { width: 240px; height: 409px; }
+  .books-page .bk-book-card:nth-child(4) > img { height: 349px; }
+  .books-page .bk-book-card > div { width: 100%; padding-top: 20px; }
+  .books-page .bk-tags { min-height: 24px; gap: 5px; }
+  .books-page .bk-tags span { padding: 5px; font: 700 14px/1 'BookkGothic', sans-serif; letter-spacing: .5px; }
+  .books-page .bk-book-card h3 { margin: 30px 0 10px; font: 700 20px/1.1 'SUIT', sans-serif; letter-spacing: -.4px; }
+  .books-page .bk-book-card div > p:last-child { font: 500 18px/1.5 'SUIT', sans-serif; letter-spacing: -.36px; }
+  .books-page .bk-progress { right: auto; bottom: 1px; width: 1069px; }
+
+  /* Best */
+  .books-page .bk-best { padding: 120px 0; }
+  .books-page .bk-simple-heading { margin-bottom: 70px; }
+  .books-page .bk-best-one { min-height: 418px; padding: 60px; }
+  .books-page .bk-best-one > div { width: 592px; }
+  .books-page .bk-best-one b { padding-bottom: 5px; font: 700 28px/1.8 'BookkMyungjo', serif; letter-spacing: -.28px; }
+  .books-page .bk-best-one h3 { margin: 40px 0 25px; font: 700 48px/1 'SUIT', sans-serif; letter-spacing: -.48px; }
+  .books-page .bk-best-one .author { margin: 0 0 40px; font: 500 24px/1 'SUIT', sans-serif; letter-spacing: -.24px; }
+  .books-page .bk-best-one p:last-child { font: 400 22px/1.5 'SUIT', sans-serif; letter-spacing: -.22px; }
+  .books-page .bk-best-secondaries { gap: 25px; margin: 25px 0 40px; }
+  .books-page .bk-best-secondaries article { height: 292px; padding: 35px 60px; }
+  .books-page .bk-best-secondaries b { font: 700 22px/1.8 'BookkMyungjo', serif; letter-spacing: -.22px; }
+  .books-page .bk-best-secondaries h3 { margin: 26px 0 15px; font: 700 32px/1 'SUIT', sans-serif; letter-spacing: -.32px; }
+  .books-page .bk-best-secondaries p { margin: 0 0 26px; font: 500 20px/1 'SUIT', sans-serif; letter-spacing: -.2px; }
+  .books-page .bk-best-secondaries small { font: 400 17px/1.5 'SUIT', sans-serif; letter-spacing: -.17px; }
+  .books-page .bk-rank-list { grid-template-columns: repeat(6, 160px); justify-content: space-between; gap: 0; }
+  .books-page .bk-rank-list li { gap: 0; font-family: 'SUIT', sans-serif; }
+  .books-page .bk-rank-list li::before { padding: 3px 0 8px; border-bottom: 1px solid #111; font: 700 20px/1.5 'BookkMyungjo', serif; letter-spacing: -.4px; }
+  .books-page .bk-rank-list img { width: 160px; aspect-ratio: 224 / 374; margin-top: 25px; }
+  .books-page .bk-rank-list b { padding: 20px 16px 0; font: 700 20px/1.5 'SUIT', sans-serif; letter-spacing: -.4px; }
+  .books-page .bk-rank-list span { padding: 10px 16px 20px; font: 500 18px/1.5 'SUIT', sans-serif; letter-spacing: -.36px; }
+
+  /* Pick */
+  .books-page .bk-pick { padding: 120px 0 80px; }
+  .books-page .bk-pick h2 { margin-bottom: 70px; }
+  .books-page .bk-pick-copy { margin: 0 0 65px; }
+  .books-page .bk-quote-grid { grid-template-columns: 720px repeat(3, 1fr); gap: 25px; height: 674px; }
+  .books-page .bk-quote-grid blockquote { height: 640px; min-height: 0; padding: 35px 30px; box-shadow: 0 4px 20.9px 3px rgba(0,0,0,.12); }
+  .books-page .bk-quote-grid blockquote > p { font: 700 22px/1.7 'BookkMyungjo', serif; letter-spacing: -.22px; }
+  .books-page .bk-quote-grid .is-featured { padding: 35px 45px; }
+  .books-page .bk-quote-grid .is-featured > p { font: 700 26px/1.6 'BookkMyungjo', serif; letter-spacing: -.26px; }
+  .books-page .bk-quote-grid footer { font-family: 'SUIT', sans-serif; font-size: 24px; font-weight: 700; line-height: 1.4; letter-spacing: -.24px; }
+  .books-page .bk-quote-grid .is-featured footer { font-size: 26px; letter-spacing: -.26px; }
+  .books-page .bk-quote-grid footer b { font-weight: 500; }
+  .books-page .bk-quote-grid footer small { display: block; margin-top: 20px; font-size: 20px; font-weight: 400; line-height: 1.5; letter-spacing: -.2px; }
+
+  /* YouTube */
+  .books-page .bk-youtube { padding: 80px 0 160px; }
+  .books-page .bk-youtube-grid { width: 1440px; height: 900px; grid-template-columns: 1fr 1fr; gap: 0; overflow: hidden; }
+  .books-page .bk-youtube-books { padding: 30px 40px 30px 0; }
+  .books-page .bk-youtube .eyebrow { margin: 0 0 5px; font: 700 24px/1.3 'BookkMyungjo', serif; letter-spacing: -.4px; }
+  .books-page .bk-youtube h2 { margin: 0 0 70px; font: 700 40px/1.3 'BookkMyungjo', serif; letter-spacing: -.4px; }
+  .books-page .bk-youtube-books article { grid-template-columns: 123px 1fr; gap: 45px; padding: 0; border: 0; align-items: end; margin-bottom: 60px; }
+  .books-page .bk-youtube-books article img { width: 123px; height: 204px; box-shadow: 0 4px 23.5px 3px rgba(0,0,0,.12); }
+  .books-page .bk-youtube-books article:first-of-type img { height: 210px; }
+  .books-page .bk-youtube-books article > div { height: 100%; padding-top: 30px; border-top: 1px solid #111; }
+  .books-page .bk-youtube-books article h3 { margin: 0 0 10px; font: 700 28px/1.3 'SUIT', sans-serif; letter-spacing: -.28px; }
+  .books-page .bk-youtube-books article b { font: 500 24px/1.3 'SUIT', sans-serif; letter-spacing: -.24px; }
+  .books-page .bk-youtube-books article p { margin: 25px 0 0; font: 400 20px/1.5 'SUIT', sans-serif; letter-spacing: -.2px; }
+  .books-page .bk-videos { display: flex; gap: 25px; align-items: flex-start; padding: 30px 0 0 40px; overflow: visible; }
+  .books-page .bk-videos article { flex: 0 0 350px; }
+  .books-page .bk-videos article a { width: 350px; height: 665px; border-radius: 12px; }
+  .books-page .bk-videos article p { margin-top: 15px; font: 400 20px/1.5 'SUIT', sans-serif; letter-spacing: -.2px; }
+
+  /* Footer */
+  .books-page .wrap > footer { padding: 80px 0; border-top: 1px solid #111; background: #ebebeb; }
+  .books-page .wrap > footer .inner { width: 1440px; }
+  .books-page .wrap > footer .left { gap: 75px; }
+  .books-page .wrap > footer h2 { width: 127px; font-size: 32px; line-height: 59px; }
+  .books-page .wrap > footer .info { font: 400 12px/1.5 'SUIT', sans-serif; letter-spacing: -.12px; }
+  .books-page .wrap > footer .info ul { padding-bottom: 30px; }
+  .books-page .wrap > footer .info .contact { padding-bottom: 8px; }
+  .books-page .wrap > footer .right { gap: 45px; font: 400 12px/1.5 'SUIT', sans-serif; letter-spacing: -.12px; }
+  .books-page .wrap > footer .right .col .top { height: 30px; font-weight: 600; }
+  .books-page .wrap > footer .right .col .bottom { font-weight: 600; }
+  .books-page .wrap > footer .right .col:nth-child(3) .bottom { gap: 3px; font-weight: 400; }
+}

@@ -1,0 +1,214 @@
+@charset "utf-8";
+
+/* Main visual: preserve the 1920 × 700 artwork ratio as the viewport grows. */
+body:not(.books-page) .main_visual {
+  --visual-slide-height: max(500px, 36.458333vw);
+  width: 100%;
+  height: calc(var(--visual-slide-height) + 80px);
+}
+
+body:not(.books-page) .main_visual .swiper { width: 100%; height: 100%; }
+body:not(.books-page) .main_visual .swiper li { width: 100%; height: var(--visual-slide-height); }
+
+/* Figma banner 664:171 */
+.banner {
+  display: flex;
+  gap: 0;
+  padding-block: clamp(80px, 7.8125vw, 150px);
+}
+
+.ban_one,
+.ban_lit {
+  position: relative;
+  flex: 1 1 0;
+  width: auto;
+  height: auto;
+  min-width: 0;
+  aspect-ratio: 720 / 453;
+  overflow: hidden;
+  background: none;
+  container-type: inline-size;
+  box-sizing: border-box;
+}
+
+.ban_one_desc {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 31.8%;
+  padding: 1.8cqw;
+  background: #fff;
+  border: 1px solid #111;
+  box-sizing: border-box;
+}
+
+.ban_one_desc p {
+  font-size: 3.333cqw;
+  line-height: 1.1;
+  letter-spacing: -.01em;
+}
+
+.banner a {
+  position: absolute;
+  z-index: 5;
+  right: 0;
+  bottom: 0;
+  padding: .7cqw;
+  color: #fff;
+  background: #000;
+  font: 700 2.222cqw/1 'BookkGothic', sans-serif;
+}
+
+.ban_one .ban_cover,
+.ban_lit .ban_cover {
+  position: absolute;
+  display: block;
+  object-fit: cover;
+  border: 1px solid #111;
+  box-sizing: border-box;
+}
+
+.ban_one .ban_cover {
+  z-index: 2;
+  top: 0;
+  right: 0;
+  width: 36.806%;
+  height: 83.886%;
+}
+
+.ban_one_title {
+  position: absolute;
+  z-index: 3;
+  left: 14.722%;
+  top: 47.903%;
+  color: #fff;
+  font-size: 3.611cqw;
+  line-height: 1;
+  letter-spacing: .02em;
+  white-space: nowrap;
+}
+
+.ban_one_title p {
+  width: fit-content;
+  margin-left: auto;
+  padding: 1.38cqw;
+  background: #000;
+  border: 1px solid #111;
+}
+
+.ban_one_title p + p { margin-top: -1px; }
+
+.ban_lit {
+  margin-left: -1px;
+  background: #fbcdd3;
+  border: 1px solid #111;
+}
+
+.ban_lit h3 {
+  position: absolute;
+  z-index: 1;
+  top: 2.2%;
+  left: 1.4%;
+  font: 700 3.611cqw/1.1 'BookkGothic', sans-serif;
+  letter-spacing: .02em;
+}
+
+.ban_lit h3 span { font-weight: 300; }
+.ban_lit h3 b { font-family: 'BookkMyungjo', serif; }
+
+.ban_lit_desc {
+  position: absolute;
+  z-index: 3;
+  left: 15.694%;
+  top: 18.322%;
+  width: 47.639%;
+  height: 81.678%;
+  padding: 1.8cqw;
+  color: #fff;
+  background: #000;
+  border: 1px solid #111;
+  box-sizing: border-box;
+}
+
+.ban_lit_desc p {
+  font-size: 3.333cqw;
+  line-height: 1.5;
+  letter-spacing: -.01em;
+}
+
+.ban_lit_desc a {
+  color: #000;
+  background: #fbcdd3;
+}
+
+.ban_lit .ban_cover {
+  z-index: 2;
+  right: 0;
+  bottom: 0;
+  width: 36.806%;
+  height: 84.768%;
+}
+
+@media (max-width: 1024px) {
+  body:not(.books-page) .main_visual {
+    --visual-slide-height: max(500px, 36.458333vw);
+    height: calc(var(--visual-slide-height) + 60px);
+  }
+
+  body:not(.books-page) .main_visual .swiper li { height: var(--visual-slide-height); }
+}
+
+@media (max-width: 767px) {
+  body:not(.books-page) .main_visual {
+    --visual-slide-height: clamp(460px, 75vw, 560px);
+    height: var(--visual-slide-height);
+  }
+
+  body:not(.books-page) .main_visual .swiper li {
+    height: var(--visual-slide-height);
+    background-position: 30% center;
+  }
+
+  body:not(.books-page) .main_visual .swiper li .inner { width: 100%; padding: 0 24px; }
+  body:not(.books-page) .main_visual .swiper li .txt_area {
+    left: 24px;
+    right: 24px;
+    bottom: 88px;
+    max-width: 520px;
+    padding: 18px;
+    background: rgba(0, 0, 0, .2);
+    backdrop-filter: blur(2px);
+  }
+
+  body:not(.books-page) .main_visual .slide2 .txt_area,
+  body:not(.books-page) .main_visual .slide3 .txt_area { background: rgba(255, 255, 255, .68); }
+  body:not(.books-page) .sub_txt { font-size: 15px; }
+  body:not(.books-page) .txt_area .tit { margin: 12px 0 20px; font-size: clamp(29px, 8vw, 40px); }
+  body:not(.books-page) .txt_area .tit span { font-size: 16px; }
+  body:not(.books-page) .txt_area .txt { font-size: 15px; }
+  body:not(.books-page) .main_visual .pager { bottom: 42px; width: 150px; }
+
+  .banner {
+    width: calc(100% + 80px);
+    margin-inline: -40px;
+    flex-direction: column;
+    gap: 24px;
+    padding-block: 72px;
+  }
+
+  .ban_one,
+  .ban_lit {
+    flex: none;
+    width: 100%;
+  }
+
+  .ban_lit { margin-left: 0; }
+}
+
+@media (max-width: 480px) {
+  body:not(.books-page) .main_visual .swiper li .txt_area { left: 14px; right: 14px; bottom: 76px; padding: 16px; }
+  body:not(.books-page) .txt_area .tit { font-size: 28px; }
+  body:not(.books-page) .txt_area .tit span { font-size: 14px; }
+}

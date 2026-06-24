@@ -1,7 +1,5 @@
 @charset "utf-8";
 
-@import url('https://cdn.jsdelivr.net/gh/sunn-us/SUIT/fonts/static/woff2/SUIT.css');
-
 @font-face {
    font-family: 'BookkMyungjo';
    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/BookkMyungjo-Lt.woff2') format('woff2');
@@ -62,6 +60,9 @@ html {
 
 
 header {
+   --header-fg: #fff;
+   --header-fg-muted: rgba(255, 255, 255, .84);
+   --header-hover: rgba(255, 255, 255, .14);
    position: fixed;
    top: var(--header-fixed-top);
    left: 0;
@@ -91,10 +92,11 @@ header>.inner {
    align-items: center;
    gap: 24px;
 
-   background: rgba(0, 0, 0, .8);
-   backdrop-filter: blur(15px);
+   background: rgba(0, 0, 0, .68);
+   backdrop-filter: blur(18px) saturate(140%);
+   -webkit-backdrop-filter: blur(18px) saturate(140%);
    border-radius: 10px;
-   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+   box-shadow: 0 8px 24px rgba(0, 0, 0, .18);
 
    overflow: visible;
    position: relative;
@@ -109,7 +111,8 @@ header h1 a {
    font-weight: 800;
    font-size: 24px;
    letter-spacing: -0.02em;
-   color: #039669;
+   color: #fff;
+   transition: color .25s ease, text-shadow .25s ease;
 }
 
 header .icons {
@@ -117,13 +120,13 @@ header .icons {
 }
 
 header .icons i {
-   font-size: 21px;
+   font-size: 22px;
 }
 
 header .icons ul {
    display: flex;
    align-items: center;
-   gap: 20px;
+   gap: 50px;
 }
 
 header .icons a {
@@ -134,12 +137,12 @@ header .icons a {
    align-items: center;
    justify-content: center;
 
-   color: #fff;
+   color: var(--header-fg);
    opacity: 0.9;
 }
 
 header .icons a:hover {
-   background: rgba(255, 255, 255, 0.08);
+   background: var(--header-hover);
    opacity: 1;
 }
 
@@ -152,7 +155,7 @@ header nav {
 header .gnb {
    display: flex;
    align-items: center;
-   gap: 50px;
+   gap: 38px;
 }
 
 header .gnb>li>a {
@@ -160,15 +163,29 @@ header .gnb>li>a {
    display: flex;
    align-items: center;
 
-   padding: 0 6px;
-   color: rgba(255, 255, 255, 0.78);
+   padding: 3px 20px;
+   color: var(--header-fg-muted);
+   font-size: 20px;
    font-weight: 600;
-   letter-spacing: -0.01em;
+   line-height: 1.5;
+   letter-spacing: -.2px;
+}
+
+header .gnb>li>a[aria-current="page"] {
+   font-weight: 800;
+}
+
+header .icons li:nth-child(2) i {
+   font-size: 25px;
+}
+
+@media (max-width: 1600px) and (min-width: 1025px) {
+   header>.inner { width: calc(100% - 80px); }
 }
 
 header .gnb>li:hover>a,
 header .gnb>li:focus-within>a {
-   color: #fff;
+   color: var(--header-fg);
 }
 
 header .gnb>li {
@@ -210,10 +227,11 @@ header .gnb>li>ul.sub::before {
    top: var(--panel-gap);
    bottom: 0;
 
-   background: rgba(0, 0, 0, .85);
+   background: rgba(0, 0, 0, .68);
    border-radius: 10px;
-   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
-   backdrop-filter: blur(15px);
+   box-shadow: 0 10px 28px rgba(0, 0, 0, .18);
+   backdrop-filter: blur(18px) saturate(140%);
+   -webkit-backdrop-filter: blur(18px) saturate(140%);
 
    z-index: -1;
 }
@@ -235,7 +253,7 @@ header .gnb>li>ul.sub>li {
 header .gnb>li>ul.sub>li>a {
    display: block;
    padding: 6px 0;
-   color: #fff;
+   color: var(--header-fg);
    font-weight: 700;
    line-height: 1.25;
 }
@@ -252,14 +270,14 @@ header .gnb>li>ul.sub ul.sub2 {
 header .gnb>li>ul.sub ul.sub2 a {
    display: block;
    padding: 2px 0;
-   color: rgba(255, 255, 255, 0.7);
+   color: var(--header-fg-muted);
    font-size: 14px;
    font-weight: 500;
    line-height: 1.35;
 }
 
 header .gnb>li>ul.sub ul.sub2 a:hover {
-   color: #fff;
+   color: var(--header-fg);
 }
 
 header .gnb>li>ul.sub>li>a:hover {

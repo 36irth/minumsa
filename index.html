@@ -15,9 +15,11 @@
    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
 
    <link rel="stylesheet" href="css/reset.css">
+   <link rel="stylesheet" href="css/fonts.css">
    <link rel="stylesheet" href="css/common.css">
    <link rel="stylesheet" href="css/main.css">
    <link rel="stylesheet" href="css/media.css">
+   <link rel="stylesheet" href="css/home-responsive.css">
 
    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css" />
    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
@@ -29,11 +31,11 @@
    <div class="wrap">
       <header>
          <div class="inner">
-            <h1><a href="#">logo</a></h1>
+            <h1><a href="index.html">민음사</a></h1>
             <nav>
                <ul class="gnb">
                   <li>
-                     <a href="#">도서</a>
+                     <a href="books.html">도서</a>
                      <ul class="sub">
                         <li>
                            <a href="#">전체 도서</a>
@@ -56,7 +58,7 @@
                      </ul>
                   </li>
                   <li>
-                     <a href="#">북클럽</a>
+                     <a href="#">북클럽/릿터/한편</a>
                      <ul class="sub">
                         <li>
                            <a href="#">민음북클럽</a>
@@ -526,9 +528,23 @@
                   </div>
                </div>
             </section>
-            <section class="banner">
-               <div class="ban_one" data-aos="fade-right" data-aos-delay="150"></div>
-               <div class="ban_lit" data-aos="fade-left" data-aos-delay="400"></div>
+            <section class="banner" aria-label="민음사 매거진">
+               <article class="ban_one" data-aos="fade-right" data-aos-delay="150">
+                  <div class="ban_one_desc">
+                     <p>책보다 짧고 논문보다 쉬운 한편의 인문학<br>학문의 최전선에서 나온<br>다양한 관점과 깊은 통찰을<br>한편의 글로 만나보세요.</p>
+                     <a href="#">자세히 보기</a>
+                  </div>
+                  <img class="ban_cover" src="img/banner_hanpyeon_cover.jpg" alt="인문잡지 한편 혼자 표지">
+                  <div class="ban_one_title"><p>“한편을 같이 읽어요.”</p><p>새로운 세대의 인문잡지 <b>한편</b></p></div>
+               </article>
+               <article class="ban_lit" data-aos="fade-left" data-aos-delay="400">
+                  <h3><span>읽고 쓰는</span> //릿한//<br><span>사람들을 위한 잡지</span> <b>Littor</b></h3>
+                  <div class="ban_lit_desc">
+                     <p><b>57호 커버스토리 주제 무속</b><br><br>케이팝 세계관을 확장한 「케이팝 데몬 헌터스」, MZ 점술가들의 연애 프로그램 「신들린 연애」…<br>무속은 지금 한국 사회의 심층에서 어떤 언어로 작동하고 있는가</p>
+                     <a href="#">자세히 보기</a>
+                  </div>
+                  <img class="ban_cover" src="img/banner_littor_cover.jpg" alt="문학잡지 Littor 57호 표지">
+               </article>
             </section>
          </div><!-- //.inner -->
          <section class="event" aria-label="event banner">
